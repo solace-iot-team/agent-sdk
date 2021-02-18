@@ -11,7 +11,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Axway/agent-sdk/pkg/agent"
 	"github.com/Axway/agent-sdk/pkg/config"
 	"github.com/Axway/agent-sdk/pkg/util"
 	"github.com/elastic/beats/v7/libbeat/beat"
@@ -212,7 +211,7 @@ func (conn *Connection) addHeaders(header *http.Header, body io.Reader, eventTim
 
 	header.Add("Authorization", "Bearer "+token)
 	header.Add("axway-target-flow", "api-central-v8")
-	header.Add("Capture-Org-ID", agent.GetCentralConfig().GetTenantID())
+	//header.Add("Capture-Org-ID", agent.GetCentralConfig().GetTenantID())
 	header.Add("User-Agent", config.AgentTypeName+"/"+config.AgentVersion)
 	header.Add("Timestamp", strconv.FormatInt(eventTime.UTC().Unix(), 10))
 	header.Add("trcblt-secret", "dHJjYmx0bW9uaXRvcmluZw==")
