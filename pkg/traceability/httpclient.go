@@ -204,10 +204,11 @@ func (conn *Connection) execRequest(url string, body io.Reader, headers map[stri
 }
 
 func (conn *Connection) addHeaders(header *http.Header, body io.Reader, eventTime time.Time) error {
-	token, err := agent.GetCentralAuthToken()
-	if err != nil {
-		return err
-	}
+	//token, err := agent.GetCentralAuthToken()
+	//if err != nil {
+	//	return err
+	//}
+	token := ""
 
 	header.Add("Authorization", "Bearer "+token)
 	header.Add("axway-target-flow", "api-central-v8")
