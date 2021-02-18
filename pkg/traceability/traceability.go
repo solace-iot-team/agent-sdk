@@ -67,6 +67,7 @@ func makeTraceabilityAgent(
 	}
 
 	var transportGroup outputs.Group
+	logp.Info("config.Protocol is ", config.Protocol)
 	if config.Protocol == "https" || config.Protocol == "http" {
 		transportGroup, err = makeHTTPClient(beat, observer, config, hosts)
 	} else {

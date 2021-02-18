@@ -214,6 +214,7 @@ func (conn *Connection) addHeaders(header *http.Header, body io.Reader, eventTim
 	header.Add("Capture-Org-ID", agent.GetCentralConfig().GetTenantID())
 	header.Add("User-Agent", config.AgentTypeName+"/"+config.AgentVersion)
 	header.Add("Timestamp", strconv.FormatInt(eventTime.UTC().Unix(), 10))
+	header.Add("trcblt-secret", "dHJjYmx0bW9uaXRvcmluZw==")
 
 	if body != nil {
 		conn.encoder.AddHeader(header)
