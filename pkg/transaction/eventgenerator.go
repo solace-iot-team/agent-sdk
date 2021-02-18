@@ -21,12 +21,22 @@ type EventGenerator interface {
 // Generator - Create the events to be published to Condor
 type Generator struct {
 	shouldAddFields bool
+	tokenRequester  *PlatformTokenGetter
 }
 
 // NewEventGenerator - Create a new event generator
 func NewEventGenerator() EventGenerator {
 	eventGen := &Generator{
 		shouldAddFields: !traceability.IsHTTPTransport(),
+	}
+	hc.RegisterHealthcheck("Event Generator", "eventgen", eventGen.healthcheck)
+	return eventGen
+}
+
+// NewEventGeneratorWithCustomValues - Create a new event generator with custom values for Axway ID
+func NewEventGeneratorWithCustomValues(tokenURL, aud, privKey, pubKey, keyPwd, clientID string, authTimeout time.Duration) EventGenerator {
+	eventGen := &Generator{
+		tokenRequester: NewPlatformTokenGetter(privKey, pubKey, keyPwd, tokenURL, aud, clientID, authTimeout),
 	}
 	hc.RegisterHealthcheck("Event Generator", "eventgen", eventGen.healthcheck)
 	return eventGen
@@ -62,11 +72,21 @@ func (e *Generator) healthcheck(name string) (status *hc.Status) {
 		Details: "",
 	}
 
-	_, err := agent.GetCentralAuthToken()
-	if err != nil {
-		status = &hc.Status{
-			Result:  hc.FAIL,
-			Details: errors.Wrap(apic.ErrAuthenticationCall, err.Error()).Error(),
+	if e.tokenRequester == nil {
+		_, err := agent.GetCentralAuthToken()
+		if err != nil {
+			status = &hc.Status{
+				Result:  hc.FAIL,
+				Details: errors.Wrap(apic.ErrAuthenticationCall, err.Error()).Error(),
+			}
+		}
+	} else {
+		_, err := e.tokenRequester.GetToken()
+		if err != nil {
+			status = &hc.Status{
+				Result:  hc.FAIL,
+				Details: errors.Wrap(apic.ErrAuthenticationCall, err.Error()).Error(),
+			}
 		}
 	}
 
@@ -99,9 +119,16 @@ func (e *Generator) createEventData(message []byte, eventFields common.MapStr) (
 func (e *Generator) createEventFields() (fields map[string]string, err error) {
 	fields = make(map[string]string)
 	var token string
-	if token, err = agent.GetCentralAuthToken(); err != nil {
-		return
+	if e.tokenRequester == nil {
+		if token, err = agent.GetCentralAuthToken(); err != nil {
+			return
+		}
+	} else {
+		if token, err = e.tokenRequester.GetToken(); err != nil {
+			return
+		}
 	}
+
 	fields["token"] = token
 	fields["axway-target-flow"] = "api-central-v8"
 	return
