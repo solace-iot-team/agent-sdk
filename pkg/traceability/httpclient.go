@@ -11,6 +11,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Axway/agent-sdk/pkg/util/log"
+
 	"github.com/Axway/agent-sdk/pkg/config"
 	"github.com/Axway/agent-sdk/pkg/util"
 	"github.com/elastic/beats/v7/libbeat/beat"
@@ -224,6 +226,7 @@ func (conn *Connection) addHeaders(header *http.Header, body io.Reader, eventTim
 
 func (conn *Connection) execHTTPRequest(req *http.Request, headers map[string]string) (int, []byte, error) {
 	for key, value := range headers {
+		log.Infof("Adding header ", key, "Value: ", value)
 		req.Header.Add(key, value)
 	}
 
