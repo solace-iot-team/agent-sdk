@@ -3,6 +3,7 @@ package v1
 import (
 	"context"
 	"fmt"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -46,6 +47,14 @@ func notFound(name, kind string) NotFoundError {
 		Status: 404,
 		Title:  "Not found error",
 		Detail: fmt.Sprintf("Resource %s of kind %s not found.", name, kind),
+	}}}
+}
+
+func preconditionFailed(name, kind string) PreconditionFailed {
+	return PreconditionFailed{[]apiv1.Error{{
+		Status: 412,
+		Title:  "Precondition faile",
+		Detail: fmt.Sprintf("Resource %s of kind %s ResourceVersion changed", name, kind),
 	}}}
 }
 
@@ -575,6 +584,35 @@ func (fk *fakeScoped) UpdateCtx(_ context.Context, ri *apiv1.ResourceInstance, o
 		return nil, notFound(ri.Metadata.Scope.Name, ri.Metadata.Scope.Kind)
 	}
 
+	uo := updateOptions{}
+
+	for _, opt := range opts {
+		opt(&uo)
+	}
+
+	if uo.mergeFunc != nil {
+		prev, err := fk.Get(ri.Name)
+		if err != nil {
+			if _, ok := err.(NotFoundError); !ok {
+				return nil, err
+			}
+		}
+
+		merged, err := uo.mergeFunc(prev, ri)
+		if err != nil {
+			return nil, err
+		}
+
+		ri, err = merged.AsInstance()
+		if err != nil {
+			return nil, err
+		}
+
+		if prev == nil {
+			return fk.Create(ri, CUserID(uo.impersonateUserID))
+		}
+	}
+
 	fk.lock.Lock()
 	defer fk.lock.Unlock()
 
@@ -611,7 +649,7 @@ func (fk *fakeScoped) create(ri *apiv1.ResourceInstance, opts ...CreateOption) (
 					ModifyUserID:    co.impersonateUserID,
 				},
 				Scope:           fk.ms,
-				ResourceVersion: "0",
+				ResourceVersion: "1",
 				References:      nil,
 				State:           "", // TODO
 			},
@@ -643,24 +681,17 @@ func (fk *fakeScoped) update(ri *apiv1.ResourceInstance, opts ...UpdateOption) (
 	}
 
 	prev, ok := fk.resources[ri.Name]
-	if !ok && uo.mergeFunc == nil {
+	if !ok {
 		return nil, notFoundInScope(ri.Name, fk.Kind, fk.ms.Name)
 	}
 
-	if uo.mergeFunc != nil {
-		merged, err := uo.mergeFunc(prev, ri)
-		if err != nil {
-			return nil, err
-		}
+	if ri.Metadata.ResourceVersion != "" && ri.Metadata.ResourceVersion != prev.Metadata.ResourceVersion {
+		return nil, preconditionFailed(ri.Name, fk.Kind)
+	}
 
-		ri, err = merged.AsInstance()
-		if err != nil {
-			return nil, err
-		}
-
-		if !ok {
-			return fk.create(ri, CUserID(uo.impersonateUserID))
-		}
+	pVer, err := strconv.Atoi(prev.Metadata.ResourceVersion)
+	if err != nil {
+		panic(err) //shouldn't happen
 	}
 
 	updated := &apiv1.ResourceInstance{
@@ -677,7 +708,7 @@ func (fk *fakeScoped) update(ri *apiv1.ResourceInstance, opts ...UpdateOption) (
 					ModifyUserID:    uo.impersonateUserID,
 				},
 				Scope:           prev.Metadata.Scope,
-				ResourceVersion: prev.Metadata.ResourceVersion,
+				ResourceVersion: strconv.Itoa(pVer + 1),
 				References:      nil,
 				State:           "", // needed?
 			},

@@ -188,6 +188,8 @@ func handleError(res *http.Response) error {
 		return NotFoundError{errors}
 	case 409:
 		return ConflictError{errors}
+	case 412:
+		return PreconditionFailed{errors}
 	case 500:
 		return InternalServerError{errors}
 	default:

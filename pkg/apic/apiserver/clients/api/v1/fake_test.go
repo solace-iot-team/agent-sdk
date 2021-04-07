@@ -103,12 +103,60 @@ func TestFakeScoped(t *testing.T) {
 	if err != nil {
 		t.Fatal("Failed due to: ", err)
 	}
-	_, err = noScope.WithScope("muhName").Get("muhResource")
+	got, err := noScope.WithScope("muhName").Get("muhResource")
 	if err != nil {
 		t.Fatal("Failed due to: ", err)
 	}
 
+	// update with wrong resource version should fail
 	ri, err := noScope.WithScope("muhName").Update(
+		&apiv1.ResourceInstance{
+			ResourceMeta: apiv1.ResourceMeta{
+				GroupVersionKind: management.K8SResourceGVK(),
+				Name:             "muhResource",
+				Metadata: apiv1.Metadata{
+					ResourceVersion: "23",
+					Scope: apiv1.MetadataScope{
+						Name: "muhName",
+					},
+				},
+				Attributes: map[string]string{"attribute": "value"},
+				Tags:       []string{"tag"},
+			},
+			Spec: map[string]interface{}{},
+		})
+	if err == nil {
+		t.Fatal("Expected error:")
+	}
+
+	// update with right resource version should work
+	ri, err = noScope.WithScope("muhName").Update(
+		&apiv1.ResourceInstance{
+			ResourceMeta: apiv1.ResourceMeta{
+				GroupVersionKind: management.K8SResourceGVK(),
+				Name:             "muhResource",
+				Metadata: apiv1.Metadata{
+					ResourceVersion: got.ResourceMeta.Metadata.ResourceVersion,
+					Scope: apiv1.MetadataScope{
+						Name: "muhName",
+					},
+				},
+				Attributes: map[string]string{"attribute": "value"},
+				Tags:       []string{"tag"},
+			},
+			Spec: map[string]interface{}{},
+		})
+	if err != nil {
+		t.Fatal("Failed due to: ", err)
+	}
+
+	// Resource version should be incremented
+	if ri.ResourceMeta.Metadata.ResourceVersion != "2" {
+		t.Fatal("Expected ResourceVersion=2")
+	}
+
+	// update with no resource version should work
+	ri, err = noScope.WithScope("muhName").Update(
 		&apiv1.ResourceInstance{
 			ResourceMeta: apiv1.ResourceMeta{
 				GroupVersionKind: management.K8SResourceGVK(),
@@ -125,6 +173,11 @@ func TestFakeScoped(t *testing.T) {
 		})
 	if err != nil {
 		t.Fatal("Failed due to: ", err)
+	}
+
+	// Resource version should be incremented
+	if ri.ResourceMeta.Metadata.ResourceVersion != "3" {
+		t.Fatal("Expected ResourceVersion=3")
 	}
 
 	t.Logf("%+v", ri)

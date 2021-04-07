@@ -87,6 +87,16 @@ func (nf BadRequestError) Error() string {
 	return fmt.Sprintf("bad request: %s", nf.Errors)
 }
 
+// PreconditionFailed -
+type PreconditionFailed struct {
+	Errors
+}
+
+// Error -
+func (nf PreconditionFailed) Error() string {
+	return fmt.Sprintf("precondition failed: %s", nf.Errors)
+}
+
 // UnexpectedError -
 type UnexpectedError struct {
 	code int
