@@ -153,8 +153,11 @@ type createOptions struct {
 	impersonateUserID string
 }
 
-// ListOptions -
-type ListOptions func(*listOptions)
+// ListOptions deprecated, will be removed or repurposed, use ListOption
+type ListOptions = ListOption
+
+// ListOption -
+type ListOption func(*listOptions)
 
 type listOptions struct {
 	query QueryNode
