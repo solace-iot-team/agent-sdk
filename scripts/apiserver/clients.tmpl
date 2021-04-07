@@ -121,7 +121,7 @@ func (c *Unscoped{{.res.kind}}Client) Update(res *{{.res.version}}.{{.res.kind}}
 {{ end }}
 
 // List -
-func (c *{{.res.kind}}Client) List(options ...v1.ListOptions) ([]*{{.res.version}}.{{.res.kind}}, error) {
+func (c *{{.res.kind}}Client) List(options ...v1.ListOption) ([]*{{.res.version}}.{{.res.kind}}, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

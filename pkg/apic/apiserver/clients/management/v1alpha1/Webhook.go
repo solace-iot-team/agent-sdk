@@ -112,7 +112,7 @@ func (c *UnscopedWebhookClient) Update(res *v1alpha1.Webhook, opts ...v1.UpdateO
 }
 
 // List -
-func (c *WebhookClient) List(options ...v1.ListOptions) ([]*v1alpha1.Webhook, error) {
+func (c *WebhookClient) List(options ...v1.ListOption) ([]*v1alpha1.Webhook, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

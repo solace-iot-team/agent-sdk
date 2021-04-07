@@ -112,7 +112,7 @@ func (c *UnscopedSecretClient) Update(res *v1alpha1.Secret, opts ...v1.UpdateOpt
 }
 
 // List -
-func (c *SecretClient) List(options ...v1.ListOptions) ([]*v1alpha1.Secret, error) {
+func (c *SecretClient) List(options ...v1.ListOption) ([]*v1alpha1.Secret, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

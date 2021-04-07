@@ -65,7 +65,7 @@ func NewEnvironmentClient(c v1.Base) (*EnvironmentClient, error) {
 }
 
 // List -
-func (c *EnvironmentClient) List(options ...v1.ListOptions) ([]*v1alpha1.Environment, error) {
+func (c *EnvironmentClient) List(options ...v1.ListOption) ([]*v1alpha1.Environment, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

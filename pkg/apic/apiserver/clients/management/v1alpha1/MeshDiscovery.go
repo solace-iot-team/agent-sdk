@@ -112,7 +112,7 @@ func (c *UnscopedMeshDiscoveryClient) Update(res *v1alpha1.MeshDiscovery, opts .
 }
 
 // List -
-func (c *MeshDiscoveryClient) List(options ...v1.ListOptions) ([]*v1alpha1.MeshDiscovery, error) {
+func (c *MeshDiscoveryClient) List(options ...v1.ListOption) ([]*v1alpha1.MeshDiscovery, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

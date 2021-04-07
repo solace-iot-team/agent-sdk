@@ -112,7 +112,7 @@ func (c *UnscopedAWSDiscoveryAgentClient) Update(res *v1alpha1.AWSDiscoveryAgent
 }
 
 // List -
-func (c *AWSDiscoveryAgentClient) List(options ...v1.ListOptions) ([]*v1alpha1.AWSDiscoveryAgent, error) {
+func (c *AWSDiscoveryAgentClient) List(options ...v1.ListOption) ([]*v1alpha1.AWSDiscoveryAgent, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

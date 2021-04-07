@@ -112,7 +112,7 @@ func (c *UnscopedConsumerInstanceClient) Update(res *v1alpha1.ConsumerInstance, 
 }
 
 // List -
-func (c *ConsumerInstanceClient) List(options ...v1.ListOptions) ([]*v1alpha1.ConsumerInstance, error) {
+func (c *ConsumerInstanceClient) List(options ...v1.ListOption) ([]*v1alpha1.ConsumerInstance, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

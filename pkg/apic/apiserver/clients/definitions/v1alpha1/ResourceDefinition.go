@@ -112,7 +112,7 @@ func (c *UnscopedResourceDefinitionClient) Update(res *v1alpha1.ResourceDefiniti
 }
 
 // List -
-func (c *ResourceDefinitionClient) List(options ...v1.ListOptions) ([]*v1alpha1.ResourceDefinition, error) {
+func (c *ResourceDefinitionClient) List(options ...v1.ListOption) ([]*v1alpha1.ResourceDefinition, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

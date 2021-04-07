@@ -112,7 +112,7 @@ func (c *UnscopedConsumerSubscriptionDefinitionClient) Update(res *v1alpha1.Cons
 }
 
 // List -
-func (c *ConsumerSubscriptionDefinitionClient) List(options ...v1.ListOptions) ([]*v1alpha1.ConsumerSubscriptionDefinition, error) {
+func (c *ConsumerSubscriptionDefinitionClient) List(options ...v1.ListOption) ([]*v1alpha1.ConsumerSubscriptionDefinition, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

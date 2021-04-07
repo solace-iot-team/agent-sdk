@@ -65,7 +65,7 @@ func NewMeshClient(c v1.Base) (*MeshClient, error) {
 }
 
 // List -
-func (c *MeshClient) List(options ...v1.ListOptions) ([]*v1alpha1.Mesh, error) {
+func (c *MeshClient) List(options ...v1.ListOption) ([]*v1alpha1.Mesh, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

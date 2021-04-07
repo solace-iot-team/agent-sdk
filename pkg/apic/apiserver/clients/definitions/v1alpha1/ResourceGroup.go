@@ -65,7 +65,7 @@ func NewResourceGroupClient(c v1.Base) (*ResourceGroupClient, error) {
 }
 
 // List -
-func (c *ResourceGroupClient) List(options ...v1.ListOptions) ([]*v1alpha1.ResourceGroup, error) {
+func (c *ResourceGroupClient) List(options ...v1.ListOption) ([]*v1alpha1.ResourceGroup, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

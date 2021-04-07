@@ -112,7 +112,7 @@ func (c *UnscopedCommandLineInterfaceClient) Update(res *v1alpha1.CommandLineInt
 }
 
 // List -
-func (c *CommandLineInterfaceClient) List(options ...v1.ListOptions) ([]*v1alpha1.CommandLineInterface, error) {
+func (c *CommandLineInterfaceClient) List(options ...v1.ListOption) ([]*v1alpha1.CommandLineInterface, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

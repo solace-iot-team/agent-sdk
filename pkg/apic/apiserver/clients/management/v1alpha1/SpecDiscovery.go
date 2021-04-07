@@ -112,7 +112,7 @@ func (c *UnscopedSpecDiscoveryClient) Update(res *v1alpha1.SpecDiscovery, opts .
 }
 
 // List -
-func (c *SpecDiscoveryClient) List(options ...v1.ListOptions) ([]*v1alpha1.SpecDiscovery, error) {
+func (c *SpecDiscoveryClient) List(options ...v1.ListOption) ([]*v1alpha1.SpecDiscovery, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

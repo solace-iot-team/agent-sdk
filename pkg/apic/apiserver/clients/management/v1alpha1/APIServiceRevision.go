@@ -112,7 +112,7 @@ func (c *UnscopedAPIServiceRevisionClient) Update(res *v1alpha1.APIServiceRevisi
 }
 
 // List -
-func (c *APIServiceRevisionClient) List(options ...v1.ListOptions) ([]*v1alpha1.APIServiceRevision, error) {
+func (c *APIServiceRevisionClient) List(options ...v1.ListOption) ([]*v1alpha1.APIServiceRevision, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

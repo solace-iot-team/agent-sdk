@@ -112,7 +112,7 @@ func (c *UnscopedK8SResourceClient) Update(res *v1alpha1.K8SResource, opts ...v1
 }
 
 // List -
-func (c *K8SResourceClient) List(options ...v1.ListOptions) ([]*v1alpha1.K8SResource, error) {
+func (c *K8SResourceClient) List(options ...v1.ListOption) ([]*v1alpha1.K8SResource, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

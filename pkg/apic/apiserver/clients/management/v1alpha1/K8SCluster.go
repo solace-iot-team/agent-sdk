@@ -65,7 +65,7 @@ func NewK8SClusterClient(c v1.Base) (*K8SClusterClient, error) {
 }
 
 // List -
-func (c *K8SClusterClient) List(options ...v1.ListOptions) ([]*v1alpha1.K8SCluster, error) {
+func (c *K8SClusterClient) List(options ...v1.ListOption) ([]*v1alpha1.K8SCluster, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

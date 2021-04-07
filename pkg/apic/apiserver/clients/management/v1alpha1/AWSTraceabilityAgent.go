@@ -112,7 +112,7 @@ func (c *UnscopedAWSTraceabilityAgentClient) Update(res *v1alpha1.AWSTraceabilit
 }
 
 // List -
-func (c *AWSTraceabilityAgentClient) List(options ...v1.ListOptions) ([]*v1alpha1.AWSTraceabilityAgent, error) {
+func (c *AWSTraceabilityAgentClient) List(options ...v1.ListOption) ([]*v1alpha1.AWSTraceabilityAgent, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

@@ -112,7 +112,7 @@ func (c *UnscopedTraceabilityAgentClient) Update(res *v1alpha1.TraceabilityAgent
 }
 
 // List -
-func (c *TraceabilityAgentClient) List(options ...v1.ListOptions) ([]*v1alpha1.TraceabilityAgent, error) {
+func (c *TraceabilityAgentClient) List(options ...v1.ListOption) ([]*v1alpha1.TraceabilityAgent, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

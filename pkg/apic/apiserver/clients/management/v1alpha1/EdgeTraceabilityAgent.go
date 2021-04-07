@@ -112,7 +112,7 @@ func (c *UnscopedEdgeTraceabilityAgentClient) Update(res *v1alpha1.EdgeTraceabil
 }
 
 // List -
-func (c *EdgeTraceabilityAgentClient) List(options ...v1.ListOptions) ([]*v1alpha1.EdgeTraceabilityAgent, error) {
+func (c *EdgeTraceabilityAgentClient) List(options ...v1.ListOption) ([]*v1alpha1.EdgeTraceabilityAgent, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

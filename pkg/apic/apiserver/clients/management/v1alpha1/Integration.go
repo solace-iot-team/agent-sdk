@@ -65,7 +65,7 @@ func NewIntegrationClient(c v1.Base) (*IntegrationClient, error) {
 }
 
 // List -
-func (c *IntegrationClient) List(options ...v1.ListOptions) ([]*v1alpha1.Integration, error) {
+func (c *IntegrationClient) List(options ...v1.ListOption) ([]*v1alpha1.Integration, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

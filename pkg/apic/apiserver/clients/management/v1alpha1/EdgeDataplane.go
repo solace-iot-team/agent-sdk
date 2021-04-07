@@ -112,7 +112,7 @@ func (c *UnscopedEdgeDataplaneClient) Update(res *v1alpha1.EdgeDataplane, opts .
 }
 
 // List -
-func (c *EdgeDataplaneClient) List(options ...v1.ListOptions) ([]*v1alpha1.EdgeDataplane, error) {
+func (c *EdgeDataplaneClient) List(options ...v1.ListOption) ([]*v1alpha1.EdgeDataplane, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err

@@ -112,7 +112,7 @@ func (c *UnscopedEdgeDiscoveryAgentClient) Update(res *v1alpha1.EdgeDiscoveryAge
 }
 
 // List -
-func (c *EdgeDiscoveryAgentClient) List(options ...v1.ListOptions) ([]*v1alpha1.EdgeDiscoveryAgent, error) {
+func (c *EdgeDiscoveryAgentClient) List(options ...v1.ListOption) ([]*v1alpha1.EdgeDiscoveryAgent, error) {
 	riList, err := c.client.List(options...)
 	if err != nil {
 		return nil, err
