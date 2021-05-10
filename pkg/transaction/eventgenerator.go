@@ -2,7 +2,6 @@ package transaction
 
 import (
 	"encoding/json"
-	"flag"
 	"time"
 
 	"github.com/Axway/agent-sdk/pkg/agent"
@@ -18,26 +17,29 @@ import (
 // EventGenerator - Create the events to be published to Condor
 type EventGenerator interface {
 	CreateEvent(logEvent LogEvent, eventTime time.Time, metaData common.MapStr, fields common.MapStr, privateData interface{}) (event beat.Event, err error)
+	SetUseTrafficForAggregation(useTrafficForAggregation bool)
 }
 
 // Generator - Create the events to be published to Condor
 type Generator struct {
-	shouldAddFields bool
-	collector       metric.Collector
+	shouldAddFields                bool
+	shouldUseTrafficForAggregation bool
+	collector                      metric.Collector
 }
 
 // NewEventGenerator - Create a new event generator
 func NewEventGenerator() EventGenerator {
 	eventGen := &Generator{
-		shouldAddFields: !traceability.IsHTTPTransport(),
+		shouldAddFields:                !traceability.IsHTTPTransport(),
+		shouldUseTrafficForAggregation: true,
 	}
 	hc.RegisterHealthcheck("Event Generator", "eventgen", eventGen.healthcheck)
-	if flag.Lookup("test.v") == nil {
-		metricEventChannel := make(chan interface{})
-		eventGen.collector = metric.NewMetricCollector(metricEventChannel)
-		metric.NewMetricPublisher(metricEventChannel)
-	}
 	return eventGen
+}
+
+// SetUseTrafficForAggregation - set the flag to use traffic events for aggregation.
+func (e *Generator) SetUseTrafficForAggregation(useTrafficForAggregation bool) {
+	e.shouldUseTrafficForAggregation = useTrafficForAggregation
 }
 
 // CreateEvent - Creates a new event to be sent to Condor
@@ -46,7 +48,7 @@ func (e *Generator) CreateEvent(logEvent LogEvent, eventTime time.Time, metaData
 	if err != nil {
 		return
 	}
-	if logEvent.TransactionSummary != nil {
+	if e.shouldUseTrafficForAggregation && logEvent.TransactionSummary != nil {
 		apiID := logEvent.TransactionSummary.Proxy.ID
 		apiName := logEvent.TransactionSummary.Proxy.Name
 		statusCode := logEvent.TransactionSummary.StatusDetail
@@ -59,8 +61,9 @@ func (e *Generator) CreateEvent(logEvent LogEvent, eventTime time.Time, metaData
 		if logEvent.TransactionSummary.Team != nil {
 			teamName = logEvent.TransactionSummary.Team.ID
 		}
-		if e.collector != nil {
-			e.collector.AddMetric(apiID, apiName, statusCode, int64(duration), appName, teamName)
+		collector := metric.GetMetricCollector()
+		if collector != nil {
+			collector.AddMetric(apiID, apiName, statusCode, int64(duration), appName, teamName)
 		}
 	}
 

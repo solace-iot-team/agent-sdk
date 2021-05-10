@@ -1,6 +1,7 @@
 package metric
 
 import (
+	"flag"
 	"sync"
 	"time"
 
@@ -28,6 +29,18 @@ type collector struct {
 	registry     metrics.Registry
 	metricMap    map[string]map[string]*APIMetric
 	jobID        string
+}
+
+var metricCollector Collector
+
+// GetMetricCollector - Returns the instance of metric collector
+func GetMetricCollector() Collector {
+	if flag.Lookup("test.v") == nil && metricCollector == nil {
+		metricEventChannel := make(chan interface{})
+		metricCollector = NewMetricCollector(metricEventChannel)
+		NewMetricPublisher(metricEventChannel)
+	}
+	return metricCollector
 }
 
 // NewMetricCollector - Create metric collector
