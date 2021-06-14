@@ -8,11 +8,15 @@ import (
 	"fmt"
 
 	cAPIV1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/api/v1"
+	catalog_v1alpha1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1"
 	definitions_v1alpha1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/definitions/v1alpha1"
 	management_v1alpha1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1"
 )
 
 type Set struct {
+	DiscoveryAgentManagementV1alpha1                 *management_v1alpha1.UnscopedDiscoveryAgentClient
+	TraceabilityAgentManagementV1alpha1              *management_v1alpha1.UnscopedTraceabilityAgentClient
+	GovernanceAgentManagementV1alpha1                *management_v1alpha1.UnscopedGovernanceAgentClient
 	EnvironmentManagementV1alpha1                    *management_v1alpha1.EnvironmentClient
 	APIServiceManagementV1alpha1                     *management_v1alpha1.UnscopedAPIServiceClient
 	APIServiceRevisionManagementV1alpha1             *management_v1alpha1.UnscopedAPIServiceRevisionClient
@@ -30,10 +34,27 @@ type Set struct {
 	MeshWorkloadManagementV1alpha1                   *management_v1alpha1.UnscopedMeshWorkloadClient
 	MeshServiceManagementV1alpha1                    *management_v1alpha1.UnscopedMeshServiceClient
 	MeshDiscoveryManagementV1alpha1                  *management_v1alpha1.UnscopedMeshDiscoveryClient
-	DiscoveryAgentManagementV1alpha1                 *management_v1alpha1.UnscopedDiscoveryAgentClient
-	TraceabilityAgentManagementV1alpha1              *management_v1alpha1.UnscopedTraceabilityAgentClient
+	AssetMappingTemplateManagementV1alpha1           *management_v1alpha1.UnscopedAssetMappingTemplateClient
+	AssetMappingManagementV1alpha1                   *management_v1alpha1.UnscopedAssetMappingClient
+	AccessRequestDefinitionManagementV1alpha1        *management_v1alpha1.UnscopedAccessRequestDefinitionClient
+	AccessRequestManagementV1alpha1                  *management_v1alpha1.UnscopedAccessRequestClient
+	DeploymentManagementV1alpha1                     *management_v1alpha1.UnscopedDeploymentClient
+	VirtualAPIManagementV1alpha1                     *management_v1alpha1.VirtualAPIClient
+	VirtualAPIReleaseManagementV1alpha1              *management_v1alpha1.VirtualAPIReleaseClient
+	ReleaseTagManagementV1alpha1                     *management_v1alpha1.UnscopedReleaseTagClient
+	VirtualServiceManagementV1alpha1                 *management_v1alpha1.UnscopedVirtualServiceClient
+	CorsRuleManagementV1alpha1                       *management_v1alpha1.UnscopedCorsRuleClient
+	OAS3DocumentManagementV1alpha1                   *management_v1alpha1.UnscopedOAS3DocumentClient
 	WebhookManagementV1alpha1                        *management_v1alpha1.UnscopedWebhookClient
 	SecretManagementV1alpha1                         *management_v1alpha1.UnscopedSecretClient
+	StageCatalogV1alpha1                             *catalog_v1alpha1.StageClient
+	AssetCatalogV1alpha1                             *catalog_v1alpha1.AssetClient
+	AssetReleaseCatalogV1alpha1                      *catalog_v1alpha1.AssetReleaseClient
+	ReleaseTagCatalogV1alpha1                        *catalog_v1alpha1.UnscopedReleaseTagClient
+	AssetResourceCatalogV1alpha1                     *catalog_v1alpha1.UnscopedAssetResourceClient
+	AssetRequestDefinitionCatalogV1alpha1            *catalog_v1alpha1.UnscopedAssetRequestDefinitionClient
+	AssetRequestCatalogV1alpha1                      *catalog_v1alpha1.UnscopedAssetRequestClient
+	DocumentCatalogV1alpha1                          *catalog_v1alpha1.UnscopedDocumentClient
 	ResourceGroupDefinitionsV1alpha1                 *definitions_v1alpha1.ResourceGroupClient
 	ResourceDefinitionDefinitionsV1alpha1            *definitions_v1alpha1.UnscopedResourceDefinitionClient
 	ResourceDefinitionVersionDefinitionsV1alpha1     *definitions_v1alpha1.UnscopedResourceDefinitionVersionClient
@@ -45,6 +66,18 @@ func New(b cAPIV1.Base) *Set {
 
 	var err error
 
+	s.DiscoveryAgentManagementV1alpha1, err = management_v1alpha1.NewDiscoveryAgentClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.DiscoveryAgent: %s", err))
+	}
+	s.TraceabilityAgentManagementV1alpha1, err = management_v1alpha1.NewTraceabilityAgentClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.TraceabilityAgent: %s", err))
+	}
+	s.GovernanceAgentManagementV1alpha1, err = management_v1alpha1.NewGovernanceAgentClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.GovernanceAgent: %s", err))
+	}
 	s.EnvironmentManagementV1alpha1, err = management_v1alpha1.NewEnvironmentClient(b)
 	if err != nil {
 		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.Environment: %s", err))
@@ -113,13 +146,49 @@ func New(b cAPIV1.Base) *Set {
 	if err != nil {
 		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.MeshDiscovery: %s", err))
 	}
-	s.DiscoveryAgentManagementV1alpha1, err = management_v1alpha1.NewDiscoveryAgentClient(b)
+	s.AssetMappingTemplateManagementV1alpha1, err = management_v1alpha1.NewAssetMappingTemplateClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.DiscoveryAgent: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.AssetMappingTemplate: %s", err))
 	}
-	s.TraceabilityAgentManagementV1alpha1, err = management_v1alpha1.NewTraceabilityAgentClient(b)
+	s.AssetMappingManagementV1alpha1, err = management_v1alpha1.NewAssetMappingClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.TraceabilityAgent: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.AssetMapping: %s", err))
+	}
+	s.AccessRequestDefinitionManagementV1alpha1, err = management_v1alpha1.NewAccessRequestDefinitionClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.AccessRequestDefinition: %s", err))
+	}
+	s.AccessRequestManagementV1alpha1, err = management_v1alpha1.NewAccessRequestClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.AccessRequest: %s", err))
+	}
+	s.DeploymentManagementV1alpha1, err = management_v1alpha1.NewDeploymentClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.Deployment: %s", err))
+	}
+	s.VirtualAPIManagementV1alpha1, err = management_v1alpha1.NewVirtualAPIClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.VirtualAPI: %s", err))
+	}
+	s.VirtualAPIReleaseManagementV1alpha1, err = management_v1alpha1.NewVirtualAPIReleaseClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.VirtualAPIRelease: %s", err))
+	}
+	s.ReleaseTagManagementV1alpha1, err = management_v1alpha1.NewReleaseTagClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.ReleaseTag: %s", err))
+	}
+	s.VirtualServiceManagementV1alpha1, err = management_v1alpha1.NewVirtualServiceClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.VirtualService: %s", err))
+	}
+	s.CorsRuleManagementV1alpha1, err = management_v1alpha1.NewCorsRuleClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.CorsRule: %s", err))
+	}
+	s.OAS3DocumentManagementV1alpha1, err = management_v1alpha1.NewOAS3DocumentClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.OAS3Document: %s", err))
 	}
 	s.WebhookManagementV1alpha1, err = management_v1alpha1.NewWebhookClient(b)
 	if err != nil {
@@ -128,6 +197,38 @@ func New(b cAPIV1.Base) *Set {
 	s.SecretManagementV1alpha1, err = management_v1alpha1.NewSecretClient(b)
 	if err != nil {
 		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.Secret: %s", err))
+	}
+	s.StageCatalogV1alpha1, err = catalog_v1alpha1.NewStageClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.Stage: %s", err))
+	}
+	s.AssetCatalogV1alpha1, err = catalog_v1alpha1.NewAssetClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.Asset: %s", err))
+	}
+	s.AssetReleaseCatalogV1alpha1, err = catalog_v1alpha1.NewAssetReleaseClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.AssetRelease: %s", err))
+	}
+	s.ReleaseTagCatalogV1alpha1, err = catalog_v1alpha1.NewReleaseTagClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.ReleaseTag: %s", err))
+	}
+	s.AssetResourceCatalogV1alpha1, err = catalog_v1alpha1.NewAssetResourceClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.AssetResource: %s", err))
+	}
+	s.AssetRequestDefinitionCatalogV1alpha1, err = catalog_v1alpha1.NewAssetRequestDefinitionClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.AssetRequestDefinition: %s", err))
+	}
+	s.AssetRequestCatalogV1alpha1, err = catalog_v1alpha1.NewAssetRequestClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.AssetRequest: %s", err))
+	}
+	s.DocumentCatalogV1alpha1, err = catalog_v1alpha1.NewDocumentClient(b)
+	if err != nil {
+		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.Document: %s", err))
 	}
 	s.ResourceGroupDefinitionsV1alpha1, err = definitions_v1alpha1.NewResourceGroupClient(b)
 	if err != nil {
