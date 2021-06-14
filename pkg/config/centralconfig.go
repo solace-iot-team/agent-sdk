@@ -19,6 +19,7 @@ const (
 	DiscoveryAgent AgentType = iota + 1
 	// TraceabilityAgent - Type definition for traceability agent
 	TraceabilityAgent
+	GovernanceAgent
 )
 
 // AgentMode - Defines the agent mode

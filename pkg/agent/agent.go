@@ -47,6 +47,7 @@ type ConfigChangeHandler func()
 var agentTypesMap = map[config.AgentType]string{
 	config.DiscoveryAgent:    "discoveryagents",
 	config.TraceabilityAgent: "traceabilityagents",
+	config.GovernanceAgent:   "governanceagents",
 }
 
 type agentData struct {
