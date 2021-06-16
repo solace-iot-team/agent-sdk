@@ -9,10 +9,6 @@
 
 package v1alpha1
 
-import (
-	"time"
-)
-
 // GovernanceAgentStatus struct for GovernanceAgentStatus
 type GovernanceAgentStatus struct {
 	// Version name for the agent revision.
@@ -22,5 +18,5 @@ type GovernanceAgentStatus struct {
 	// A way to communicate details about the current status by the agent
 	Message string `json:"message,omitempty"`
 	// The last updated event timestamp provided by the agent
-	LastActivityTime time.Time `json:"lastActivityTime,omitempty"`
+	LastActivityTime string `json:"lastActivityTime,omitempty"`
 }

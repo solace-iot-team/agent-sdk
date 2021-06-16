@@ -235,6 +235,8 @@ func UpdateStatus(status, description string) {
 }
 
 func fetchConfig() error {
+	// TODO remove
+	log.Debug("Calling fetchConfig() NOW !!!!!")
 	// Get Agent Resources
 	isChanged, err := refreshResources()
 	if err != nil {
@@ -358,6 +360,8 @@ func createAgentStatusSubResource(agentResourceType, status, message string) int
 		return createDiscoveryAgentStatusResource(status, message)
 	case v1alpha1.TraceabilityAgentResource:
 		return createTraceabilityAgentStatusResource(status, message)
+	case v1alpha1.GovernanceAgentResource:
+		return createGovernanceAgentStatusResource(status, message)
 	default:
 		panic(ErrUnsupportedAgentType)
 	}
@@ -374,6 +378,8 @@ func mergeResourceWithConfig() {
 		mergeDiscoveryAgentWithConfig(agent.cfg)
 	case v1alpha1.TraceabilityAgentResource:
 		mergeTraceabilityAgentWithConfig(agent.cfg)
+	case v1alpha1.GovernanceAgentResource:
+		mergeGovernanceAgentWithConfig(agent.cfg)
 	default:
 		panic(ErrUnsupportedAgentType)
 	}
