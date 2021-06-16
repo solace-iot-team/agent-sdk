@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 
 	apiv1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
+	"github.com/Axway/agent-sdk/pkg/util/log"
 )
 
 var (
@@ -36,19 +37,33 @@ func init() {
 
 // GovernanceAgent Resource
 type GovernanceAgent struct {
-	apiv1.ResourceMeta
+	//apiv1.ResourceMeta
+	apiv1.ResourceInstance
 
 	Owner struct{} `json:"owner"`
 
-	Runtimeconfig struct{} `json:"runtimeconfig"`
+	//Runtimeconfig struct{} `json:"runtimeconfig"`
+	// TODO MANUAL CHANGE
+	// TODO try this
+	//Runtimeconfig map[string]interface{} `json:"runtimeconfig"`
+	RuntimeConfig RuntimeConfig
 
 	Spec GovernanceAgentSpec `json:"spec"`
 
 	Status GovernanceAgentStatus `json:"status"`
 }
 
+type RuntimeConfig struct {
+	Routes    []json.RawMessage `json:"routes"`
+	Cluster   []json.RawMessage `json:"cluster"` // TODO should be clusters
+	Secrets   []json.RawMessage `json:"secrets"`
+	Endpoints []json.RawMessage `json:"endpoints"`
+	Listeners []json.RawMessage `json:"listeners"`
+}
+
 // FromInstance converts a ResourceInstance to a GovernanceAgent
 func (res *GovernanceAgent) FromInstance(ri *apiv1.ResourceInstance) error {
+	log.Debugf("!!!!!!!!!!!!! SDK FromInstance")
 	if ri == nil {
 		res = nil
 		return nil
@@ -65,13 +80,39 @@ func (res *GovernanceAgent) FromInstance(ri *apiv1.ResourceInstance) error {
 		return err
 	}
 
-	*res = GovernanceAgent{ResourceMeta: ri.ResourceMeta, Spec: *spec}
+	// TODO MANUAL ADD
+	rtc, err := json.Marshal(ri.Runtimeconfig)
+	if err != nil {
+		return err
+	}
 
+	log.Debugf("!!!!!!!!!!!!! SDK rtc=%s", rtc)
+
+	rtcx := &RuntimeConfig{}
+	err = json.Unmarshal(rtc, rtcx)
+	if err != nil {
+		return err
+	}
+
+	log.Debugf("!!!!!!!!!!!!! SDK rtcx=%s", rtcx)
+
+	/*rtc, err := json.Marshal(ri.Runtimeconfig)
+	if err != nil {
+		return err
+	}
+	runtimeConfig := &RuntimeConfig{}
+	err = json.Unmarshal(rtc, runtimeConfig)
+	if err != nil {
+		return err
+	}*/
+
+	*res = GovernanceAgent{Spec: *spec, RuntimeConfig: *rtcx}
 	return err
 }
 
 // AsInstance converts a GovernanceAgent to a ResourceInstance
 func (res *GovernanceAgent) AsInstance() (*apiv1.ResourceInstance, error) {
+	log.Debugf("AsInstance")
 	m, err := json.Marshal(res.Spec)
 	if err != nil {
 		return nil, err

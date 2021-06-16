@@ -4,7 +4,8 @@ package v1
 type ResourceInstance struct {
 	ResourceMeta
 	// Resource instance specs.
-	Spec map[string]interface{} `json:"spec"`
+	Spec          map[string]interface{} `json:"spec"`
+	Runtimeconfig map[string]interface{} `json:"runtimeconfig"`
 }
 
 // AsInstance -
