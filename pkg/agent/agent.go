@@ -243,7 +243,7 @@ func fetchConfig() error {
 		return err
 	}
 
-	if isChanged {
+	if isChanged || true {
 		// merge agent resource config with central config
 		mergeResourceWithConfig()
 		if agent.agentResourceChangeHandler != nil {
@@ -315,6 +315,24 @@ func getAgentResource() (*apiV1.ResourceInstance, error) {
 		return nil, err
 	}
 
+	/* TODO remove
+	meta := apiV1.ResourceMeta{}
+	json.Unmarshal(response, &meta)
+
+	var target apiV1.ResourceInstance
+	switch meta.Kind {
+	case "GovernanceAgent":
+		target = &v1alpha1.GovernanceAgent{}
+	}
+
+	err = json.Unmarshal(response, &target)
+
+	return &target, nil
+
+
+	target := &v1alpha1.GovernanceAgent{}
+	err = json.Unmarshal(response, &target)
+	*/
 	agent := apiV1.ResourceInstance{}
 	json.Unmarshal(response, &agent)
 	return &agent, nil
