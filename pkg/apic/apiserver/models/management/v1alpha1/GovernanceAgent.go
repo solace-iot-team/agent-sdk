@@ -44,15 +44,7 @@ type GovernanceAgent struct {
 
 	Status GovernanceAgentStatus `json:"status"`
 
-	RuntimeConfig RuntimeConfig
-}
-
-type RuntimeConfig struct {
-	Routes    []json.RawMessage `json:"routes"`
-	Cluster   []json.RawMessage `json:"cluster"` // TODO should be clusters
-	Secrets   []json.RawMessage `json:"secrets"`
-	Endpoints []json.RawMessage `json:"endpoints"`
-	Listeners []json.RawMessage `json:"listeners"`
+	RuntimeConfig map[string]interface{}
 }
 
 // FromInstance converts a ResourceInstance to a GovernanceAgent
@@ -73,18 +65,7 @@ func (res *GovernanceAgent) FromInstance(ri *apiv1.ResourceInstance) error {
 		return err
 	}
 
-	rtc, err := json.Marshal(ri.SubResources["runtimeconfig"])
-	if err != nil {
-		return err
-	}
-
-	rtcx := &RuntimeConfig{}
-	err = json.Unmarshal(rtc, rtcx)
-	if err != nil {
-		return err
-	}
-
-	*res = GovernanceAgent{ResourceMeta: ri.ResourceMeta, Spec: *spec, RuntimeConfig: *rtcx}
+	*res = GovernanceAgent{ResourceMeta: ri.ResourceMeta, Spec: *spec, RuntimeConfig: ri.SubResources["runtimeconfig"].(map[string]interface{})}
 	return err
 }
 
