@@ -23,7 +23,7 @@ type GroupKind struct {
 
 // GroupVersionKind - The group, version & kind of the resource
 type GroupVersionKind struct {
-	GroupKind
+	GroupKind  `mapstructure:",squash"`
 	APIVersion string `json:"apiVersion,omitempty"`
 }
 
@@ -67,8 +67,8 @@ type AuditMetadata struct {
 type Metadata struct {
 	// Internal id of the resource.
 	ID    string        `json:"id,omitempty"`
-	Audit AuditMetadata `json:"audit,omitempty"`
-	Scope MetadataScope `json:"scope,omitempty"`
+	Audit AuditMetadata `json:"audit,omitempty",mapstructure:",squash"`
+	Scope MetadataScope `json:"scope,omitempty",mapstructure:",squash"`
 	// Internal version of this object that can be used by clients to determine when objects have changed.
 	ResourceVersion string      `json:"resourceVersion,omitempty"`
 	References      []Reference `json:"references,omitempty"`

@@ -21,6 +21,7 @@ import (
 	"github.com/Axway/agent-sdk/pkg/util/errors"
 	hc "github.com/Axway/agent-sdk/pkg/util/healthcheck"
 	"github.com/Axway/agent-sdk/pkg/util/log"
+	"github.com/mitchellh/mapstructure"
 )
 
 // AgentStatus - status for Agent resource
@@ -235,14 +236,13 @@ func UpdateStatus(status, description string) {
 }
 
 func fetchConfig() error {
-	// TODO remove
-	log.Debug("Calling fetchConfig() NOW !!!!!")
 	// Get Agent Resources
 	isChanged, err := refreshResources()
 	if err != nil {
 		return err
 	}
 
+	// TODO remove the "true"
 	if isChanged || true {
 		// merge agent resource config with central config
 		mergeResourceWithConfig()
@@ -315,26 +315,17 @@ func getAgentResource() (*apiV1.ResourceInstance, error) {
 		return nil, err
 	}
 
-	/* TODO remove
-	meta := apiV1.ResourceMeta{}
-	json.Unmarshal(response, &meta)
-
-	var target apiV1.ResourceInstance
-	switch meta.Kind {
-	case "GovernanceAgent":
-		target = &v1alpha1.GovernanceAgent{}
+	var unmarshalled interface{}
+	if err = json.Unmarshal(response, &unmarshalled); err != nil {
+		return nil, err
 	}
 
-	err = json.Unmarshal(response, &target)
-
-	return &target, nil
-
-
-	target := &v1alpha1.GovernanceAgent{}
-	err = json.Unmarshal(response, &target)
-	*/
 	agent := apiV1.ResourceInstance{}
-	json.Unmarshal(response, &agent)
+	if err = mapstructure.Decode(unmarshalled, &agent); err != nil {
+		log.Errorf("Error decoding agent:%s", err)
+		//return nil, err
+	}
+
 	return &agent, nil
 }
 

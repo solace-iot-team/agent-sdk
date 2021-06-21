@@ -2,10 +2,9 @@ package v1
 
 // ResourceInstance API Server generic resource structure.
 type ResourceInstance struct {
-	ResourceMeta
-	// Resource instance specs.
-	Spec          map[string]interface{} `json:"spec"`
-	Runtimeconfig map[string]interface{} `json:"runtimeconfig"`
+	ResourceMeta `mapstructure:",squash"`
+	Spec         map[string]interface{} `json:"spec"`
+	SubResources map[string]interface{} `mapstructure:",remain"`
 }
 
 // AsInstance -
