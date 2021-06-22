@@ -13,10 +13,10 @@ type Meta interface {
 
 // ResourceMeta metadata for a ResourceInstance
 type ResourceMeta struct {
-	GroupVersionKind `mapstructure:",squash"`
-	Name             string   `json:"name"`
-	Title            string   `json:"title,omitempty"`
-	Metadata         Metadata `json:"metadata,omitempty",mapstructure:",squash"`
+	GroupVersionKind
+	Name     string   `json:"name"`
+	Title    string   `json:"title,omitempty"`
+	Metadata Metadata `json:"metadata,omitempty"`
 	// Custom attributes added to objects.
 	Attributes map[string]string `json:"attributes,omitempty"`
 	// List of tags.
