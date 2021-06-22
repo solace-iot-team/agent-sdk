@@ -21,7 +21,6 @@ import (
 	"github.com/Axway/agent-sdk/pkg/util/errors"
 	hc "github.com/Axway/agent-sdk/pkg/util/healthcheck"
 	"github.com/Axway/agent-sdk/pkg/util/log"
-	"github.com/mitchellh/mapstructure"
 )
 
 // AgentStatus - status for Agent resource
@@ -315,17 +314,8 @@ func getAgentResource() (*apiV1.ResourceInstance, error) {
 		return nil, err
 	}
 
-	var unmarshalled interface{}
-	if err = json.Unmarshal(response, &unmarshalled); err != nil {
-		return nil, err
-	}
-
 	agent := apiV1.ResourceInstance{}
-	if err = mapstructure.Decode(unmarshalled, &agent); err != nil {
-		log.Errorf("Error decoding agent:%s", err)
-		//return nil, err
-	}
-
+	agent.UnmarshalJSON(response)
 	return &agent, nil
 }
 
