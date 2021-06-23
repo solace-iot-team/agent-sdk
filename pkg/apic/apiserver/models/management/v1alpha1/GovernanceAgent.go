@@ -40,11 +40,13 @@ type GovernanceAgent struct {
 
 	Owner struct{} `json:"owner"`
 
-	Runtimeconfig struct{} `json:"runtimeconfig"`
-
 	Spec GovernanceAgentSpec `json:"spec"`
 
 	Status GovernanceAgentStatus `json:"status"`
+
+	// Keep this config opaque to the SDK, the Governance Agent will know how to marshal it
+	// specifically for the data plane it governs.
+	RuntimeConfig json.RawMessage `json:"runtimeconfig"`
 }
 
 // FromInstance converts a ResourceInstance to a GovernanceAgent
@@ -60,8 +62,7 @@ func (res *GovernanceAgent) FromInstance(ri *apiv1.ResourceInstance) error {
 		return err
 	}
 
-	*res = GovernanceAgent{ResourceMeta: ri.ResourceMeta, Spec: *spec}
-
+	*res = GovernanceAgent{ResourceMeta: ri.ResourceMeta, Spec: *spec, RuntimeConfig: ri.SubResources["runtimeconfig"]}
 	return err
 }
 
