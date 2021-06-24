@@ -358,7 +358,7 @@ func createAgentStatusSubResource(agentResourceType, status, message string) int
 		return createDiscoveryAgentStatusResource(status, message)
 	case v1alpha1.TraceabilityAgentResourceName:
 		return createTraceabilityAgentStatusResource(status, message)
-	case v1alpha1.GovernanceAgentResource:
+	case v1alpha1.GovernanceAgentResourceName:
 		return createGovernanceAgentStatusResource(status, message)
 	default:
 		panic(ErrUnsupportedAgentType)
@@ -376,7 +376,7 @@ func mergeResourceWithConfig() {
 		mergeDiscoveryAgentWithConfig(agent.cfg)
 	case v1alpha1.TraceabilityAgentResourceName:
 		mergeTraceabilityAgentWithConfig(agent.cfg)
-	case v1alpha1.GovernanceAgentResource:
+	case v1alpha1.GovernanceAgentResourceName:
 		mergeGovernanceAgentWithConfig(agent.cfg)
 	default:
 		panic(ErrUnsupportedAgentType)

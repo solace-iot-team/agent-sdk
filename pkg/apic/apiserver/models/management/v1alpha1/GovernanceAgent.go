@@ -23,7 +23,7 @@ var (
 const (
 	GovernanceAgentScope = "Environment"
 
-	GovernanceAgentResource = "governanceagents"
+	GovernanceAgentResourceName = "governanceagents"
 )
 
 func GovernanceAgentGVK() apiv1.GroupVersionKind {
@@ -31,7 +31,7 @@ func GovernanceAgentGVK() apiv1.GroupVersionKind {
 }
 
 func init() {
-	apiv1.RegisterGVK(_GovernanceAgentGVK, GovernanceAgentScope, GovernanceAgentResource)
+	apiv1.RegisterGVK(_GovernanceAgentGVK, GovernanceAgentScope, GovernanceAgentResourceName)
 }
 
 // GovernanceAgent Resource
@@ -40,13 +40,11 @@ type GovernanceAgent struct {
 
 	Owner interface{} `json:"owner"`
 
+	Runtimeconfig interface{} `json:"runtimeconfig"`
+
 	Spec GovernanceAgentSpec `json:"spec"`
 
 	Status GovernanceAgentStatus `json:"status"`
-
-	// Keep this config opaque to the SDK, the Governance Agent will know how to marshal it
-	// specifically for the data plane it governs.
-	RuntimeConfig interface{} `json:"runtimeconfig"`
 }
 
 // FromInstance converts a ResourceInstance to a GovernanceAgent
@@ -58,6 +56,21 @@ func (res *GovernanceAgent) FromInstance(ri *apiv1.ResourceInstance) error {
 
 	err := json.Unmarshal(ri.RawResource, res)
 	return err
+}
+
+// GovernanceAgentFromInstanceArray converts a []*ResourceInstance to a []*GovernanceAgent
+func GovernanceAgentFromInstanceArray(fromArray []*apiv1.ResourceInstance) ([]*GovernanceAgent, error) {
+	newArray := make([]*GovernanceAgent, 0)
+	for _, item := range fromArray {
+		res := &GovernanceAgent{}
+		err := res.FromInstance(item)
+		if err != nil {
+			return make([]*GovernanceAgent, 0), err
+		}
+		newArray = append(newArray, res)
+	}
+
+	return newArray, nil
 }
 
 // AsInstance converts a GovernanceAgent to a ResourceInstance
@@ -73,5 +86,8 @@ func (res *GovernanceAgent) AsInstance() (*apiv1.ResourceInstance, error) {
 		return nil, err
 	}
 
-	return &apiv1.ResourceInstance{ResourceMeta: res.ResourceMeta, Spec: spec}, nil
+	meta := res.ResourceMeta
+	meta.GroupVersionKind = GovernanceAgentGVK()
+
+	return &apiv1.ResourceInstance{ResourceMeta: meta, Spec: spec}, nil
 }
