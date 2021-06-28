@@ -241,7 +241,7 @@ func fetchConfig() error {
 		return err
 	}
 
-	if isChanged || true {
+	if isChanged {
 		// merge agent resource config with central config
 		mergeResourceWithConfig()
 		if agent.agentResourceChangeHandler != nil {
