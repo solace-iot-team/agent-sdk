@@ -194,8 +194,8 @@ func (c *ServiceClient) compareEndpoint(endPointSrc, endPointTarget v1alpha1.Api
 		endPointSrc.Routing.BasePath == endPointTarget.Routing.BasePath
 }
 
-// getAPIServiceInstanceByName - Returns the API service instance for specified name
-func (c *ServiceClient) getAPIServiceInstanceByName(instanceName string) (*v1alpha1.APIServiceInstance, error) {
+// GetAPIServiceInstanceByName - Returns the API service instance for specified name
+func (c *ServiceClient) GetAPIServiceInstanceByName(instanceName string) (*v1alpha1.APIServiceInstance, error) {
 	headers, err := c.createHeader()
 	if err != nil {
 		return nil, err

@@ -63,6 +63,9 @@ type Client interface {
 	GetAPIServiceRevisions(queryParams map[string]string, URL, stage string) ([]*v1alpha1.APIServiceRevision, error)
 	GetAPIServiceInstances(queryParams map[string]string, URL string) ([]*v1alpha1.APIServiceInstance, error)
 	GetAPIV1ResourceInstances(queryParams map[string]string, URL string) ([]*apiv1.ResourceInstance, error)
+	GetAPIServiceByName(serviceName string) (*v1alpha1.APIService, error)
+	GetAPIServiceInstanceByName(serviceInstanceName string) (*v1alpha1.APIServiceInstance, error)
+	GetAPIRevisionByName(serviceRevisionName string) (*v1alpha1.APIServiceRevision, error)
 }
 
 // New -
