@@ -23,9 +23,9 @@ import (
 
 	"math/big"
 
-	"github.com/Axway/agent-sdk/pkg/config"
-	"github.com/Axway/agent-sdk/pkg/util"
-	"github.com/Axway/agent-sdk/pkg/util/log"
+	"github.com/solace-iot-team/agent-sdk/pkg/config"
+	"github.com/solace-iot-team/agent-sdk/pkg/util"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/log"
 
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/google/uuid"

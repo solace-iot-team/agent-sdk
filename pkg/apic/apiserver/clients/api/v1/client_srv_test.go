@@ -14,9 +14,9 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/api/v1"
-	v1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
-	management "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
+	. "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/api/v1"
+	v1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/api/v1"
+	management "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
 )
 
 func TestQueries(t *testing.T) {

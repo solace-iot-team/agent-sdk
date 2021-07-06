@@ -3,8 +3,8 @@ package config
 import (
 	"testing"
 
-	"github.com/Axway/agent-sdk/pkg/cmd/properties"
-	"github.com/Axway/agent-sdk/pkg/util/log"
+	"github.com/solace-iot-team/agent-sdk/pkg/cmd/properties"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/log"
 	"github.com/spf13/cobra"
 	"github.com/stretchr/testify/assert"
 )

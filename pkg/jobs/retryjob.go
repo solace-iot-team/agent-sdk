@@ -1,7 +1,7 @@
 package jobs
 
 import (
-	"github.com/Axway/agent-sdk/pkg/util/errors"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/errors"
 )
 
 type retryJobProps struct {

@@ -1,6 +1,6 @@
 package config
 
-import configerrors "github.com/Axway/agent-sdk/pkg/util/errors"
+import configerrors "github.com/solace-iot-team/agent-sdk/pkg/util/errors"
 
 // Errors hit when validating or parsing config
 var (

@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/Axway/agent-sdk/pkg/cmd/properties"
-	"github.com/Axway/agent-sdk/pkg/util/log"
 	"github.com/elastic/beats/v7/libbeat/cfgfile"
 	"github.com/elastic/beats/v7/libbeat/common"
 	"github.com/sirupsen/logrus"
+	"github.com/solace-iot-team/agent-sdk/pkg/cmd/properties"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/log"
 )
 
 // LogConfig - Interface for logging config

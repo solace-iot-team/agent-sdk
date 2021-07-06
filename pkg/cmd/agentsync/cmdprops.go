@@ -3,7 +3,7 @@ package agentsync
 import (
 	"fmt"
 
-	"github.com/Axway/agent-sdk/pkg/cmd/properties"
+	"github.com/solace-iot-team/agent-sdk/pkg/cmd/properties"
 )
 
 const syncFlag = "synchronize"

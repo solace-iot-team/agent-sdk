@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/Axway/agent-sdk/pkg/util/log"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/log"
 )
 
 // HandleInterfaceFuncNotImplemented - use this function to recover from a panic due to an interface not being implemented

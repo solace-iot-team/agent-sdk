@@ -954,10 +954,10 @@ go mod verify
 After resolving the dependencies, run *make build* to compile the source and generate the binary executable for the target system.
 The Agent SDK provides support for specifying the version of the agent at the build time. The following variables can be set by compile flags to setup agent name, version, commit SHA and build time.
 
-- github.com/Axway/agent-sdk/pkg/cmd.BuildTime
-- github.com/Axway/agent-sdk/pkg/cmd.BuildVersion
-- github.com/Axway/agent-sdk/pkg/cmd.BuildCommitSha
-- github.com/Axway/agent-sdk/pkg/cmd.BuildAgentName
+- github.com/solace-iot-team/agent-sdk/pkg/cmd.BuildTime
+- github.com/solace-iot-team/agent-sdk/pkg/cmd.BuildVersion
+- github.com/solace-iot-team/agent-sdk/pkg/cmd.BuildCommitSha
+- github.com/solace-iot-team/agent-sdk/pkg/cmd.BuildAgentName
 
 The following is an example of the build command that can be configured in the Makefile
 
@@ -966,10 +966,10 @@ The following is an example of the build command that can be configured in the M
 export version=`cat version` && \
 export commit_id=`git rev-parse --short HEAD` && \
 go build -tags static_all \
-	-ldflags="-X 'github.com/Axway/agent-sdk/pkg/cmd.BuildTime=$${time}' \
-			-X 'github.com/Axway/agent-sdk/pkg/cmd.BuildVersion=$${version}' \
-			-X 'github.com/Axway/agent-sdk/pkg/cmd.BuildCommitSha=$${commit_id}' \
-			-X 'github.com/Axway/agent-sdk/pkg/cmd.BuildAgentName=SampleTraceabilityAgent'" \
+	-ldflags="-X 'github.com/solace-iot-team/agent-sdk/pkg/cmd.BuildTime=$${time}' \
+			-X 'github.com/solace-iot-team/agent-sdk/pkg/cmd.BuildVersion=$${version}' \
+			-X 'github.com/solace-iot-team/agent-sdk/pkg/cmd.BuildCommitSha=$${commit_id}' \
+			-X 'github.com/solace-iot-team/agent-sdk/pkg/cmd.BuildAgentName=SampleTraceabilityAgent'" \
 	-a -o ${WORKSPACE}/bin/apic_traceability_agent ${WORKSPACE}/main.go
 ```
 

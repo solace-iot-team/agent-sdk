@@ -11,13 +11,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Axway/agent-sdk/pkg/agent"
-	"github.com/Axway/agent-sdk/pkg/config"
-	"github.com/Axway/agent-sdk/pkg/traceability/sampling"
 	"github.com/elastic/beats/v7/libbeat/beat"
 	"github.com/elastic/beats/v7/libbeat/common"
 	"github.com/elastic/beats/v7/libbeat/outputs"
 	"github.com/elastic/beats/v7/libbeat/publisher"
+	"github.com/solace-iot-team/agent-sdk/pkg/agent"
+	"github.com/solace-iot-team/agent-sdk/pkg/config"
+	"github.com/solace-iot-team/agent-sdk/pkg/traceability/sampling"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"strconv"
 
-	coreapi "github.com/Axway/agent-sdk/pkg/api"
-	utilerrors "github.com/Axway/agent-sdk/pkg/util/errors"
+	coreapi "github.com/solace-iot-team/agent-sdk/pkg/api"
+	utilerrors "github.com/solace-iot-team/agent-sdk/pkg/util/errors"
 	"github.com/tidwall/gjson"
 )
 

@@ -10,11 +10,11 @@ import (
 	"strings"
 	"time"
 
-	coreapi "github.com/Axway/agent-sdk/pkg/api"
-	v1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
-	"github.com/Axway/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
-	unifiedcatalog "github.com/Axway/agent-sdk/pkg/apic/unifiedcatalog/models"
-	utilerrors "github.com/Axway/agent-sdk/pkg/util/errors"
+	coreapi "github.com/solace-iot-team/agent-sdk/pkg/api"
+	v1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/api/v1"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
+	unifiedcatalog "github.com/solace-iot-team/agent-sdk/pkg/apic/unifiedcatalog/models"
+	utilerrors "github.com/solace-iot-team/agent-sdk/pkg/util/errors"
 	"github.com/tidwall/gjson"
 )
 

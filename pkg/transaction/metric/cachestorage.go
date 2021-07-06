@@ -8,8 +8,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/Axway/agent-sdk/pkg/cache"
-	"github.com/Axway/agent-sdk/pkg/traceability"
+	"github.com/solace-iot-team/agent-sdk/pkg/cache"
+	"github.com/solace-iot-team/agent-sdk/pkg/traceability"
 )
 
 const (

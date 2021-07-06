@@ -6,7 +6,7 @@ import (
 	"go/token"
 	"strings"
 
-	utilerrors "github.com/Axway/agent-sdk/pkg/util/errors"
+	utilerrors "github.com/solace-iot-team/agent-sdk/pkg/util/errors"
 )
 
 // ConditionParser - Represents the filter condition parser

@@ -8,8 +8,8 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/Axway/agent-sdk/pkg/util/log"
 	"github.com/sirupsen/logrus"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/log"
 	"github.com/subosito/gotenv"
 )
 

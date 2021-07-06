@@ -5,7 +5,7 @@ import (
 	"html/template"
 	"strings"
 
-	apiv1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
+	apiv1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/api/v1"
 )
 
 // Errors -

@@ -9,11 +9,11 @@ import (
 	"testing"
 	"time"
 
-	coreapi "github.com/Axway/agent-sdk/pkg/api"
-	v1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
-	"github.com/Axway/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
-	uc "github.com/Axway/agent-sdk/pkg/apic/unifiedcatalog/models"
-	corecfg "github.com/Axway/agent-sdk/pkg/config"
+	coreapi "github.com/solace-iot-team/agent-sdk/pkg/api"
+	v1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/api/v1"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
+	uc "github.com/solace-iot-team/agent-sdk/pkg/apic/unifiedcatalog/models"
+	corecfg "github.com/solace-iot-team/agent-sdk/pkg/config"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/Axway/agent-sdk/pkg/api"
-	"github.com/Axway/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
-	"github.com/Axway/agent-sdk/pkg/util"
+	"github.com/solace-iot-team/agent-sdk/pkg/api"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
+	"github.com/solace-iot-team/agent-sdk/pkg/util"
 
 	"github.com/stretchr/testify/assert"
 )

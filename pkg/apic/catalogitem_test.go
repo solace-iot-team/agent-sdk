@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/Axway/agent-sdk/pkg/api"
+	"github.com/solace-iot-team/agent-sdk/pkg/api"
 	"github.com/stretchr/testify/assert"
 )
 

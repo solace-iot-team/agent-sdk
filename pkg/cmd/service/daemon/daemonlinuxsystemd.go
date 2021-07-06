@@ -7,7 +7,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/Axway/agent-sdk/pkg/cmd"
+	"github.com/solace-iot-team/agent-sdk/pkg/cmd"
 )
 
 const (

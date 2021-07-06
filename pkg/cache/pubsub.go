@@ -3,8 +3,8 @@ package cache
 import (
 	"fmt"
 
-	"github.com/Axway/agent-sdk/pkg/notification"
-	util "github.com/Axway/agent-sdk/pkg/util"
+	"github.com/solace-iot-team/agent-sdk/pkg/notification"
+	util "github.com/solace-iot-team/agent-sdk/pkg/util"
 )
 
 var topics map[string]*cachePubSub

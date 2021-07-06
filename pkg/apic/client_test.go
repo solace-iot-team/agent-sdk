@@ -8,10 +8,10 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/Axway/agent-sdk/pkg/api"
-	"github.com/Axway/agent-sdk/pkg/apic/auth"
-	corecfg "github.com/Axway/agent-sdk/pkg/config"
-	"github.com/Axway/agent-sdk/pkg/util/healthcheck"
+	"github.com/solace-iot-team/agent-sdk/pkg/api"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic/auth"
+	corecfg "github.com/solace-iot-team/agent-sdk/pkg/config"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/healthcheck"
 )
 
 func TestNewClient(t *testing.T) {

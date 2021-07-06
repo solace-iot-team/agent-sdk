@@ -1,6 +1,6 @@
 package healthcheck
 
-import "github.com/Axway/agent-sdk/pkg/util/errors"
+import "github.com/solace-iot-team/agent-sdk/pkg/util/errors"
 
 //Healthcheck errors
 var (

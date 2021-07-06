@@ -8,13 +8,13 @@ import (
 	"net/http"
 	"strconv"
 
-	coreapi "github.com/Axway/agent-sdk/pkg/api"
-	v1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
-	"github.com/Axway/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
-	corecfg "github.com/Axway/agent-sdk/pkg/config"
-	utilerrors "github.com/Axway/agent-sdk/pkg/util/errors"
-	log "github.com/Axway/agent-sdk/pkg/util/log"
 	"github.com/gabriel-vasile/mimetype"
+	coreapi "github.com/solace-iot-team/agent-sdk/pkg/api"
+	v1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/api/v1"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
+	corecfg "github.com/solace-iot-team/agent-sdk/pkg/config"
+	utilerrors "github.com/solace-iot-team/agent-sdk/pkg/util/errors"
+	log "github.com/solace-iot-team/agent-sdk/pkg/util/log"
 )
 
 func (c *ServiceClient) buildConsumerInstanceSpec(serviceBody *ServiceBody, doc string) v1alpha1.ConsumerInstanceSpec {

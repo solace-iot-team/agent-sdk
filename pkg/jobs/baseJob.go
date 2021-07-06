@@ -4,8 +4,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Axway/agent-sdk/pkg/util/errors"
-	"github.com/Axway/agent-sdk/pkg/util/log"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/errors"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/log"
 )
 
 type baseJob struct {

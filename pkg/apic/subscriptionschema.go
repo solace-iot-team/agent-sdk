@@ -4,12 +4,12 @@ import (
 	"encoding/json"
 	"net/http"
 
-	coreapi "github.com/Axway/agent-sdk/pkg/api"
-	v1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
-	"github.com/Axway/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
-	corecfg "github.com/Axway/agent-sdk/pkg/config"
-	"github.com/Axway/agent-sdk/pkg/util"
-	agenterrors "github.com/Axway/agent-sdk/pkg/util/errors"
+	coreapi "github.com/solace-iot-team/agent-sdk/pkg/api"
+	v1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/api/v1"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
+	corecfg "github.com/solace-iot-team/agent-sdk/pkg/config"
+	"github.com/solace-iot-team/agent-sdk/pkg/util"
+	agenterrors "github.com/solace-iot-team/agent-sdk/pkg/util/errors"
 )
 
 // SubscriptionSchema -

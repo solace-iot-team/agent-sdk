@@ -16,9 +16,9 @@ import (
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 
-	v1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
-	"github.com/Axway/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
-	corecfg "github.com/Axway/agent-sdk/pkg/config"
+	v1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/api/v1"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
+	corecfg "github.com/solace-iot-team/agent-sdk/pkg/config"
 )
 
 func getPFlag(cmd AgentRootCmd, flagName string) *flag.Flag {

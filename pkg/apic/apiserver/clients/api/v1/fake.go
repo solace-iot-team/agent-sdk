@@ -7,8 +7,8 @@ import (
 	"sync"
 	"time"
 
-	apiv1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
 	"github.com/google/uuid"
+	apiv1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/api/v1"
 )
 
 func event(eType apiv1.EventType, ri *apiv1.ResourceInstance) *apiv1.Event {

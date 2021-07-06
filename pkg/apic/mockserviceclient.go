@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Axway/agent-sdk/pkg/api"
-	corecfg "github.com/Axway/agent-sdk/pkg/config"
+	"github.com/solace-iot-team/agent-sdk/pkg/api"
+	corecfg "github.com/solace-iot-team/agent-sdk/pkg/config"
 )
 
 // GetTestServiceClient - return a true ServiceClient, but with mocks for tokengetter and the HTTPClient and dummy values

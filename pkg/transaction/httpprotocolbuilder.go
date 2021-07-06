@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/Axway/agent-sdk/pkg/traceability/redaction"
+	"github.com/solace-iot-team/agent-sdk/pkg/traceability/redaction"
 )
 
 // HTTPProtocolBuilder - Interface to build the HTTP protocol details for transaction log event

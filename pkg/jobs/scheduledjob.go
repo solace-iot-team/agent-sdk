@@ -5,7 +5,7 @@ import (
 
 	"github.com/gorhill/cronexpr"
 
-	"github.com/Axway/agent-sdk/pkg/util/errors"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/errors"
 )
 
 type scheduleJobProps struct {

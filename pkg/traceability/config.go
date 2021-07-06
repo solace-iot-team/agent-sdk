@@ -4,9 +4,9 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/Axway/agent-sdk/pkg/traceability/redaction"
-	"github.com/Axway/agent-sdk/pkg/traceability/sampling"
-	"github.com/Axway/agent-sdk/pkg/util/log"
+	"github.com/solace-iot-team/agent-sdk/pkg/traceability/redaction"
+	"github.com/solace-iot-team/agent-sdk/pkg/traceability/sampling"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/log"
 
 	"github.com/elastic/beats/v7/libbeat/beat"
 	"github.com/elastic/beats/v7/libbeat/common"

@@ -1,6 +1,6 @@
 package notify
 
-import agenterrors "github.com/Axway/agent-sdk/pkg/util/errors"
+import agenterrors "github.com/solace-iot-team/agent-sdk/pkg/util/errors"
 
 // Errors hit when sending subscription notifications
 var (

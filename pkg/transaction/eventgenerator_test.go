@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Axway/agent-sdk/pkg/agent"
-	corecfg "github.com/Axway/agent-sdk/pkg/config"
 	"github.com/elastic/beats/v7/libbeat/common"
+	"github.com/solace-iot-team/agent-sdk/pkg/agent"
+	corecfg "github.com/solace-iot-team/agent-sdk/pkg/config"
 	"github.com/stretchr/testify/assert"
 )
 

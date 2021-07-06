@@ -4,15 +4,15 @@ import (
 	"encoding/json"
 	"fmt"
 
-	coreapi "github.com/Axway/agent-sdk/pkg/api"
-	"github.com/Axway/agent-sdk/pkg/apic"
-	apiV1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
-	"github.com/Axway/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
-	"github.com/Axway/agent-sdk/pkg/config"
-	"github.com/Axway/agent-sdk/pkg/jobs"
-	utilErrors "github.com/Axway/agent-sdk/pkg/util/errors"
-	hc "github.com/Axway/agent-sdk/pkg/util/healthcheck"
-	"github.com/Axway/agent-sdk/pkg/util/log"
+	coreapi "github.com/solace-iot-team/agent-sdk/pkg/api"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic"
+	apiV1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/api/v1"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
+	"github.com/solace-iot-team/agent-sdk/pkg/config"
+	"github.com/solace-iot-team/agent-sdk/pkg/jobs"
+	utilErrors "github.com/solace-iot-team/agent-sdk/pkg/util/errors"
+	hc "github.com/solace-iot-team/agent-sdk/pkg/util/healthcheck"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/log"
 )
 
 const (

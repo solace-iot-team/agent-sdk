@@ -3,7 +3,7 @@ package config
 import (
 	"reflect"
 
-	"github.com/Axway/agent-sdk/pkg/util"
+	"github.com/solace-iot-team/agent-sdk/pkg/util"
 )
 
 // ValidateConfig - Validates the agent config

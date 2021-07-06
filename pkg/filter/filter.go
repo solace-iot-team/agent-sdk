@@ -3,7 +3,7 @@ package filter
 import (
 	"strconv"
 
-	log "github.com/Axway/agent-sdk/pkg/util/log"
+	log "github.com/solace-iot-team/agent-sdk/pkg/util/log"
 )
 
 // Filter - Interface for filter

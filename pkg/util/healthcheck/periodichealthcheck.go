@@ -3,7 +3,7 @@ package healthcheck
 import (
 	"time"
 
-	"github.com/Axway/agent-sdk/pkg/jobs"
+	"github.com/solace-iot-team/agent-sdk/pkg/jobs"
 )
 
 const maxConsecutiveErr = 3

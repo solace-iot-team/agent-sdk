@@ -34,9 +34,9 @@ Before filing a new task, try to make sure your problem does not already exist b
 
 Before fixing a bug we need to reproduce and confirm it. We require that you provide a reproducible scenario. Having a minimal reproducible scenario gives us important information without going back and forth to you with additional questions.
 
-Submit a feature request [here](https://github.com/Axway/agent-sdk/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=)
+Submit a feature request [here](https://github.com/solace-iot-team/agent-sdk/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=)
 
-Report a bug [here](https://github.com/Axway/agent-sdk/issues/new?assignees=&labels=bug&template=bug_report.md&title=)
+Report a bug [here](https://github.com/solace-iot-team/agent-sdk/issues/new?assignees=&labels=bug&template=bug_report.md&title=)
 
 ## Security Issues
 
@@ -86,10 +86,10 @@ After cloning the Agent SDK, run `make download` to download all the project dep
 
 Two sample stubs are provided within the SDK source code:
 
-* Discovery agent: <https://github.com/Axway/agent-sdk/raw/main/samples/apic_discovery_agent.zip>
-* Traceability agent: <https://github.com/Axway/agent-sdk/raw/main/samples/apic_traceability_agent.zip>
+* Discovery agent: <https://github.com/solace-iot-team/agent-sdk/raw/main/samples/apic_discovery_agent.zip>
+* Traceability agent: <https://github.com/solace-iot-team/agent-sdk/raw/main/samples/apic_traceability_agent.zip>
 
-Refer to <https://github.com/Axway/agent-sdk#sample-projects>
+Refer to <https://github.com/solace-iot-team/agent-sdk#sample-projects>
 
 # Axway Contributors
 

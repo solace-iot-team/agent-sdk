@@ -1,6 +1,6 @@
 package apic
 
-import "github.com/Axway/agent-sdk/pkg/util/errors"
+import "github.com/solace-iot-team/agent-sdk/pkg/util/errors"
 
 // Errors hit when validating AMPLIFY Central connectivity
 var (
@@ -32,5 +32,5 @@ var (
 	ErrSubscriptionManagerDown            = errors.New(1158, "subscription manager is not running")
 
 	// Service body builer
-	ErrSetSpecEndPoints = errors.New(1160, "error getting endpoints for the API specification")	
+	ErrSetSpecEndPoints = errors.New(1160, "error getting endpoints for the API specification")
 )

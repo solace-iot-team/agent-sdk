@@ -3,7 +3,7 @@ package transaction
 import (
 	"testing"
 
-	"github.com/Axway/agent-sdk/pkg/traceability/redaction"
+	"github.com/solace-iot-team/agent-sdk/pkg/traceability/redaction"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -1,9 +1,9 @@
 package notify
 
 import (
-	"github.com/Axway/agent-sdk/pkg/apic"
-	"github.com/Axway/agent-sdk/pkg/config"
-	corecfg "github.com/Axway/agent-sdk/pkg/config"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic"
+	"github.com/solace-iot-team/agent-sdk/pkg/config"
+	corecfg "github.com/solace-iot-team/agent-sdk/pkg/config"
 )
 
 var globalCfg corecfg.SubscriptionConfig

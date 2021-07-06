@@ -3,7 +3,7 @@ package apic
 import (
 	"fmt"
 
-	"github.com/Axway/agent-sdk/pkg/config"
+	"github.com/solace-iot-team/agent-sdk/pkg/config"
 )
 
 const (

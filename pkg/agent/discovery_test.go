@@ -7,12 +7,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Axway/agent-sdk/pkg/apic"
-	v1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
-	"github.com/Axway/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
-	"github.com/Axway/agent-sdk/pkg/apic/auth"
-	"github.com/Axway/agent-sdk/pkg/config"
-	hc "github.com/Axway/agent-sdk/pkg/util/healthcheck"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic"
+	v1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/api/v1"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic/auth"
+	"github.com/solace-iot-team/agent-sdk/pkg/config"
+	hc "github.com/solace-iot-team/agent-sdk/pkg/util/healthcheck"
 	"github.com/stretchr/testify/assert"
 )
 

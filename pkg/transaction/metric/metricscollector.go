@@ -5,14 +5,14 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Axway/agent-sdk/pkg/agent"
-	"github.com/Axway/agent-sdk/pkg/cmd"
-	"github.com/Axway/agent-sdk/pkg/jobs"
-	"github.com/Axway/agent-sdk/pkg/traceability"
-	"github.com/Axway/agent-sdk/pkg/util"
-	"github.com/Axway/agent-sdk/pkg/util/log"
 	jwt "github.com/dgrijalva/jwt-go"
 	metrics "github.com/rcrowley/go-metrics"
+	"github.com/solace-iot-team/agent-sdk/pkg/agent"
+	"github.com/solace-iot-team/agent-sdk/pkg/cmd"
+	"github.com/solace-iot-team/agent-sdk/pkg/jobs"
+	"github.com/solace-iot-team/agent-sdk/pkg/traceability"
+	"github.com/solace-iot-team/agent-sdk/pkg/util"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/log"
 )
 
 // Collector - interface for collecting metrics

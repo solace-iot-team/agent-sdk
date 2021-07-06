@@ -6,9 +6,9 @@ import (
 	"strconv"
 	"strings"
 
-	coreerrors "github.com/Axway/agent-sdk/pkg/util/errors"
-	"github.com/Axway/agent-sdk/pkg/util/log"
 	"github.com/getkin/kin-openapi/openapi3"
+	coreerrors "github.com/solace-iot-team/agent-sdk/pkg/util/errors"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/log"
 )
 
 // oas3SpecProcessor parses and validates an OAS3 spec, and exposes methods to modify the content of the spec.

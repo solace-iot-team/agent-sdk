@@ -4,8 +4,8 @@ import (
 	"sync"
 	"time"
 
-	corecfg "github.com/Axway/agent-sdk/pkg/config"
-	"github.com/Axway/agent-sdk/pkg/util/log"
+	corecfg "github.com/solace-iot-team/agent-sdk/pkg/config"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/log"
 )
 
 var statusConfig corecfg.StatusConfig

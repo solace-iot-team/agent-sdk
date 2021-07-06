@@ -29,7 +29,7 @@ Before registering a job, the Job interface has to be implemented for your job
 package main
 
 import (
-  github.com/Axway/agent-sdk/pkg/jobs
+  github.com/solace-iot-team/agent-sdk/pkg/jobs
 )
 
 type MyJob struct {
@@ -68,7 +68,7 @@ package main
 import (
   "fmt"
 
-  "github.com/Axway/agent-sdk/pkg/jobs"
+  "github.com/solace-iot-team/agent-sdk/pkg/jobs"
 )
 
 func main() {
@@ -95,7 +95,7 @@ package main
 import (
   "fmt"
 
-  "github.com/Axway/agent-sdk/pkg/jobs"
+  "github.com/solace-iot-team/agent-sdk/pkg/jobs"
 )
 
 func main() {
@@ -123,7 +123,7 @@ package main
 import (
   "fmt"
 
-  "github.com/Axway/agent-sdk/pkg/jobs"
+  "github.com/solace-iot-team/agent-sdk/pkg/jobs"
 )
 
 func main() {
@@ -189,7 +189,7 @@ package main
 import (
   "fmt"
 
-  "github.com/Axway/agent-sdk/pkg/jobs"
+  "github.com/solace-iot-team/agent-sdk/pkg/jobs"
 )
 
 func main() {
@@ -214,7 +214,7 @@ Here is an example of how to create 2 jobs that can not execute at the same time
 package main
 
 import (
-  github.com/Axway/agent-sdk/pkg/jobs
+  github.com/solace-iot-team/agent-sdk/pkg/jobs
 )
 
 type FirstJob struct {

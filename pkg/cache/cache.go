@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"time"
 
-	util "github.com/Axway/agent-sdk/pkg/util"
+	util "github.com/solace-iot-team/agent-sdk/pkg/util"
 )
 
 var globalCache Cache

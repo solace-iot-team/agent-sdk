@@ -10,9 +10,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Axway/agent-sdk/pkg/util"
-	"github.com/Axway/agent-sdk/pkg/util/errors"
-	"github.com/Axway/agent-sdk/pkg/util/log"
+	"github.com/solace-iot-team/agent-sdk/pkg/util"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/errors"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/log"
 	"github.com/spf13/cobra"
 	flag "github.com/spf13/pflag"
 	"github.com/spf13/viper"

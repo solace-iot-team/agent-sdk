@@ -4,10 +4,10 @@ import (
 	"strings"
 	"testing"
 
-	coreapi "github.com/Axway/agent-sdk/pkg/api"
-	"github.com/Axway/agent-sdk/pkg/apic"
-	"github.com/Axway/agent-sdk/pkg/cmd/properties"
-	"github.com/Axway/agent-sdk/pkg/config"
+	coreapi "github.com/solace-iot-team/agent-sdk/pkg/api"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic"
+	"github.com/solace-iot-team/agent-sdk/pkg/cmd/properties"
+	"github.com/solace-iot-team/agent-sdk/pkg/config"
 	"github.com/spf13/cobra"
 	"github.com/stretchr/testify/assert"
 )

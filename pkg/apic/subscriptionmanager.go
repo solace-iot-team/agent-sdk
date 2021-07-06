@@ -4,12 +4,12 @@ import (
 	"sync"
 	"time"
 
-	v1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
-	"github.com/Axway/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
-	"github.com/Axway/agent-sdk/pkg/jobs"
-	"github.com/Axway/agent-sdk/pkg/notification"
-	utilerrors "github.com/Axway/agent-sdk/pkg/util/errors"
-	log "github.com/Axway/agent-sdk/pkg/util/log"
+	v1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/api/v1"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
+	"github.com/solace-iot-team/agent-sdk/pkg/jobs"
+	"github.com/solace-iot-team/agent-sdk/pkg/notification"
+	utilerrors "github.com/solace-iot-team/agent-sdk/pkg/util/errors"
+	log "github.com/solace-iot-team/agent-sdk/pkg/util/log"
 )
 
 // SubscriptionManager - Interface for subscription manager

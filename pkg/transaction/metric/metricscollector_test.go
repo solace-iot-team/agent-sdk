@@ -9,10 +9,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Axway/agent-sdk/pkg/agent"
-	"github.com/Axway/agent-sdk/pkg/cmd"
-	"github.com/Axway/agent-sdk/pkg/config"
 	"github.com/elastic/beats/v7/libbeat/paths"
+	"github.com/solace-iot-team/agent-sdk/pkg/agent"
+	"github.com/solace-iot-team/agent-sdk/pkg/cmd"
+	"github.com/solace-iot-team/agent-sdk/pkg/config"
 	"github.com/stretchr/testify/assert"
 )
 

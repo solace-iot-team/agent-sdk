@@ -1,10 +1,10 @@
 package apic
 
 import (
-	coreapi "github.com/Axway/agent-sdk/pkg/api"
-	"github.com/Axway/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
-	"github.com/Axway/agent-sdk/pkg/apic/auth"
-	corecfg "github.com/Axway/agent-sdk/pkg/config"
+	coreapi "github.com/solace-iot-team/agent-sdk/pkg/api"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic/auth"
+	corecfg "github.com/solace-iot-team/agent-sdk/pkg/config"
 )
 
 // Various consts for use

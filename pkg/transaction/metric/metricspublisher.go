@@ -10,10 +10,10 @@ import (
 	"net/textproto"
 	"strconv"
 
-	"github.com/Axway/agent-sdk/pkg/agent"
-	"github.com/Axway/agent-sdk/pkg/api"
-	"github.com/Axway/agent-sdk/pkg/util/log"
 	"github.com/google/uuid"
+	"github.com/solace-iot-team/agent-sdk/pkg/agent"
+	"github.com/solace-iot-team/agent-sdk/pkg/api"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/log"
 )
 
 // publisher - interface for metric publisher

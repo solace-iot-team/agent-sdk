@@ -6,8 +6,8 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/Axway/agent-sdk/pkg/cmd/properties"
-	"github.com/Axway/agent-sdk/pkg/util/log"
+	"github.com/solace-iot-team/agent-sdk/pkg/cmd/properties"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/log"
 )
 
 // NotificationType - Type definition for subscription state

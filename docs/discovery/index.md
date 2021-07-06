@@ -282,7 +282,7 @@ func initConfig(centralConfig corecfg.CentralConfig) (interface{}, error) {
 ```
 
 ### Filtering
-The Agent SDK provides github.com/Axway/agent-sdk/pkg/filter package to allow setting up config for filtering the discovered APIS for publishing them to Amplify Central. The filter expression to be evaluated for discovering the API from Axway Edge API Gateway. The filter value is a conditional expression that can use logical operators to compare two value.
+The Agent SDK provides github.com/solace-iot-team/agent-sdk/pkg/filter package to allow setting up config for filtering the discovered APIS for publishing them to Amplify Central. The filter expression to be evaluated for discovering the API from Axway Edge API Gateway. The filter value is a conditional expression that can use logical operators to compare two value.
 The conditional expression must have "tag" as the prefix/selector in the symbol name. For e.g.
 
 ```
@@ -687,10 +687,10 @@ go mod verify
 After resolving the dependencies, run *make build* to compile the source and generate the binary executable for the target system.
 The Agent SDK provides support for specifying the version of the agent at the build time. The following variables can be set by compile flags to set up agent name, version, commit SHA and build time.
 
-- github.com/Axway/agent-sdk/pkg/cmd.BuildTime
-- github.com/Axway/agent-sdk/pkg/cmd.BuildVersion
-- github.com/Axway/agent-sdk/pkg/cmd.BuildCommitSha
-- github.com/Axway/agent-sdk/pkg/cmd.BuildAgentName
+- github.com/solace-iot-team/agent-sdk/pkg/cmd.BuildTime
+- github.com/solace-iot-team/agent-sdk/pkg/cmd.BuildVersion
+- github.com/solace-iot-team/agent-sdk/pkg/cmd.BuildCommitSha
+- github.com/solace-iot-team/agent-sdk/pkg/cmd.BuildAgentName
 
 The following is an example of the build command that can be configured in the Makefile
 
@@ -699,10 +699,10 @@ The following is an example of the build command that can be configured in the M
 export version=`cat version` && \
 export commit_id=`git rev-parse --short HEAD` && \
 go build -tags static_all \
-	-ldflags="-X 'github.com/Axway/agent-sdk/pkg/cmd.BuildTime=$${time}' \
-			-X 'github.com/Axway/agent-sdk/pkg/cmd.BuildVersion=$${version}' \
-			-X 'github.com/Axway/agent-sdk/pkg/cmd.BuildCommitSha=$${commit_id}' \
-			-X 'github.com/Axway/agent-sdk/pkg/cmd.BuildAgentName=SampleDiscoveryAgent'" \
+	-ldflags="-X 'github.com/solace-iot-team/agent-sdk/pkg/cmd.BuildTime=$${time}' \
+			-X 'github.com/solace-iot-team/agent-sdk/pkg/cmd.BuildVersion=$${version}' \
+			-X 'github.com/solace-iot-team/agent-sdk/pkg/cmd.BuildCommitSha=$${commit_id}' \
+			-X 'github.com/solace-iot-team/agent-sdk/pkg/cmd.BuildAgentName=SampleDiscoveryAgent'" \
 	-a -o ${WORKSPACE}/bin/discovery_agent ${WORKSPACE}/main.go
 ```
 

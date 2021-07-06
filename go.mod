@@ -1,4 +1,4 @@
-module github.com/Axway/agent-sdk
+module github.com/solace-iot-team/agent-sdk
 
 go 1.16
 

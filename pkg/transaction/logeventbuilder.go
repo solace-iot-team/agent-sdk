@@ -5,8 +5,8 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/Axway/agent-sdk/pkg/agent"
-	"github.com/Axway/agent-sdk/pkg/traceability/redaction"
+	"github.com/solace-iot-team/agent-sdk/pkg/agent"
+	"github.com/solace-iot-team/agent-sdk/pkg/traceability/redaction"
 )
 
 const defaultAPICDeployment = "prod"

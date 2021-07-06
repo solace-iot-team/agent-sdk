@@ -6,9 +6,9 @@ package clients
 
 import (
         "fmt"
-	cAPIV1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/api/v1";
+	cAPIV1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/api/v1";
 	{{- range $i, $gv := .input.set }}
-	{{ $gv.group }}_{{ $gv.version }} "github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/{{ $gv.group }}/{{ $gv.version }}";
+	{{ $gv.group }}_{{ $gv.version }} "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/{{ $gv.group }}/{{ $gv.version }}";
 	{{- end}}
 )
 
@@ -31,7 +31,7 @@ func New(b cAPIV1.Base) *Set {
 	{{ range $j, $k := $gv.kinds -}}
 	s.{{ $k.kind }}{{ $gv.group | strings.Title }}{{ $gv.version | strings.Title }}, err = {{ $gv.group }}_{{ $gv.version }}.New{{ $k.kind }}Client(b)
         if err != nil {
-        	panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/{{ $gv.group }}/{{ $gv.version }}.{{ $k.kind }}: %s", err))
+        	panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/{{ $gv.group }}/{{ $gv.version }}.{{ $k.kind }}: %s", err))
         }
 	{{ end -}}
 	{{ end -}}

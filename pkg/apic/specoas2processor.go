@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	coreerrors "github.com/Axway/agent-sdk/pkg/util/errors"
+	coreerrors "github.com/solace-iot-team/agent-sdk/pkg/util/errors"
 )
 
 var validOA2Schemes = map[string]bool{"http": true, "https": true, "ws": true, "wss": true}

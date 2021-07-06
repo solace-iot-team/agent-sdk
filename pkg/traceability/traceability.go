@@ -7,18 +7,18 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/Axway/agent-sdk/pkg/agent"
-	"github.com/Axway/agent-sdk/pkg/jobs"
-	"github.com/Axway/agent-sdk/pkg/traceability/sampling"
-	"github.com/Axway/agent-sdk/pkg/util/log"
 	"github.com/elastic/beats/v7/libbeat/beat"
 	"github.com/elastic/beats/v7/libbeat/common"
 	"github.com/elastic/beats/v7/libbeat/common/transport/tlscommon"
 	"github.com/elastic/beats/v7/libbeat/outputs"
 	"github.com/elastic/beats/v7/libbeat/paths"
 	"github.com/elastic/beats/v7/libbeat/publisher"
+	"github.com/solace-iot-team/agent-sdk/pkg/agent"
+	"github.com/solace-iot-team/agent-sdk/pkg/jobs"
+	"github.com/solace-iot-team/agent-sdk/pkg/traceability/sampling"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/log"
 
-	hc "github.com/Axway/agent-sdk/pkg/util/healthcheck"
+	hc "github.com/solace-iot-team/agent-sdk/pkg/util/healthcheck"
 )
 
 // OutputEventProcessor - P

@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
-	coreapi "github.com/Axway/agent-sdk/pkg/api"
-	uc "github.com/Axway/agent-sdk/pkg/apic/unifiedcatalog/models"
-	agenterrors "github.com/Axway/agent-sdk/pkg/util/errors"
+	coreapi "github.com/solace-iot-team/agent-sdk/pkg/api"
+	uc "github.com/solace-iot-team/agent-sdk/pkg/apic/unifiedcatalog/models"
+	agenterrors "github.com/solace-iot-team/agent-sdk/pkg/util/errors"
 )
 
 // SubscriptionState - Type definition for subscription state

@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"strings"
 
-	log "github.com/Axway/agent-sdk/pkg/util/log"
+	log "github.com/solace-iot-team/agent-sdk/pkg/util/log"
 )
 
 // WebhookConfig - Interface for webhook config

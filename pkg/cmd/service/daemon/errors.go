@@ -1,6 +1,6 @@
 package daemon
 
-import "github.com/Axway/agent-sdk/pkg/util/errors"
+import "github.com/solace-iot-team/agent-sdk/pkg/util/errors"
 
 // Errors that are hit while managing an Agent's service
 var (

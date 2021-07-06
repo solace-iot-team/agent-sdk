@@ -7,9 +7,9 @@ import (
 
 	"net/http/httputil"
 
-	apiv1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
-	"github.com/Axway/agent-sdk/pkg/apic/auth"
 	ot "github.com/opentracing/opentracing-go"
+	apiv1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/api/v1"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic/auth"
 )
 
 // Options

@@ -3,7 +3,7 @@ package v1
 import (
 	"testing"
 
-	"github.com/Axway/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
 )
 
 func TestRSQL(t *testing.T) {

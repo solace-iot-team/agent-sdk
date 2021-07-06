@@ -5,11 +5,11 @@ import (
 	"errors"
 	"net/http"
 
-	coreapi "github.com/Axway/agent-sdk/pkg/api"
-	v1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
-	"github.com/Axway/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
-	utilerrors "github.com/Axway/agent-sdk/pkg/util/errors"
 	"github.com/google/uuid"
+	coreapi "github.com/solace-iot-team/agent-sdk/pkg/api"
+	v1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/api/v1"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
+	utilerrors "github.com/solace-iot-team/agent-sdk/pkg/util/errors"
 )
 
 func (c *ServiceClient) buildAPIServiceSpec(serviceBody *ServiceBody) v1alpha1.ApiServiceSpec {

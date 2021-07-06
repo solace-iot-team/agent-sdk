@@ -1,9 +1,9 @@
 package agent
 
 import (
-	"github.com/Axway/agent-sdk/pkg/apic"
-	apiV1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
-	"github.com/Axway/agent-sdk/pkg/util/log"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic"
+	apiV1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/api/v1"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/log"
 )
 
 // PublishAPIFunc definition for the PublishAPI func

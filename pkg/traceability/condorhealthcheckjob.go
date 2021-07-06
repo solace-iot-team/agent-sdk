@@ -5,8 +5,8 @@ import (
 	"net"
 	"net/http"
 
-	"github.com/Axway/agent-sdk/pkg/api"
-	"github.com/Axway/agent-sdk/pkg/jobs"
+	"github.com/solace-iot-team/agent-sdk/pkg/api"
+	"github.com/solace-iot-team/agent-sdk/pkg/jobs"
 )
 
 const healthcheckCondor = "Traceability connectivity"

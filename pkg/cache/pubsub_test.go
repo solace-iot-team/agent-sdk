@@ -3,7 +3,7 @@ package cache
 import (
 	"testing"
 
-	"github.com/Axway/agent-sdk/pkg/notification"
+	"github.com/solace-iot-team/agent-sdk/pkg/notification"
 
 	"github.com/stretchr/testify/assert"
 )

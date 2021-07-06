@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	corecmd "github.com/Axway/agent-sdk/pkg/cmd"
+	corecmd "github.com/solace-iot-team/agent-sdk/pkg/cmd"
 	"github.com/spf13/cobra"
 )
 

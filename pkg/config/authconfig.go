@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/Axway/agent-sdk/pkg/util/exception"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/exception"
 )
 
 const tokenEndpoint = "/protocol/openid-connect/token"

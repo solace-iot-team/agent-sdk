@@ -5,7 +5,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/Axway/agent-sdk/pkg/cmd/service/daemon"
+	"github.com/solace-iot-team/agent-sdk/pkg/cmd/service/daemon"
 )
 
 var (

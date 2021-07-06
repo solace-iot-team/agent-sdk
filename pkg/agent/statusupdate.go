@@ -3,10 +3,10 @@ package agent
 import (
 	"time"
 
-	"github.com/Axway/agent-sdk/pkg/jobs"
-	"github.com/Axway/agent-sdk/pkg/util/errors"
-	hc "github.com/Axway/agent-sdk/pkg/util/healthcheck"
-	"github.com/Axway/agent-sdk/pkg/util/log"
+	"github.com/solace-iot-team/agent-sdk/pkg/jobs"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/errors"
+	hc "github.com/solace-iot-team/agent-sdk/pkg/util/healthcheck"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/log"
 )
 
 const (

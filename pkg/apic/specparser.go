@@ -6,10 +6,10 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/Axway/agent-sdk/pkg/util/oas"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/oas"
 
-	"github.com/Axway/agent-sdk/pkg/util/wsdl"
 	"github.com/emicklei/proto"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/wsdl"
 	"gopkg.in/yaml.v2"
 )
 

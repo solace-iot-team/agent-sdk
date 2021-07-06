@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Axway/agent-sdk/pkg/apic"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -7,10 +7,10 @@ package clients
 import (
 	"fmt"
 
-	cAPIV1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/api/v1"
-	catalog_v1alpha1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1"
-	definitions_v1alpha1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/definitions/v1alpha1"
-	management_v1alpha1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1"
+	cAPIV1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/api/v1"
+	catalog_v1alpha1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1"
+	definitions_v1alpha1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/definitions/v1alpha1"
+	management_v1alpha1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1"
 )
 
 type Set struct {
@@ -60,151 +60,151 @@ func New(b cAPIV1.Base) *Set {
 
 	s.DiscoveryAgentManagementV1alpha1, err = management_v1alpha1.NewDiscoveryAgentClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.DiscoveryAgent: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.DiscoveryAgent: %s", err))
 	}
 	s.TraceabilityAgentManagementV1alpha1, err = management_v1alpha1.NewTraceabilityAgentClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.TraceabilityAgent: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.TraceabilityAgent: %s", err))
 	}
 	s.EnvironmentManagementV1alpha1, err = management_v1alpha1.NewEnvironmentClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.Environment: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.Environment: %s", err))
 	}
 	s.APIServiceManagementV1alpha1, err = management_v1alpha1.NewAPIServiceClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.APIService: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.APIService: %s", err))
 	}
 	s.APIServiceRevisionManagementV1alpha1, err = management_v1alpha1.NewAPIServiceRevisionClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.APIServiceRevision: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.APIServiceRevision: %s", err))
 	}
 	s.APIServiceInstanceManagementV1alpha1, err = management_v1alpha1.NewAPIServiceInstanceClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.APIServiceInstance: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.APIServiceInstance: %s", err))
 	}
 	s.ConsumerInstanceManagementV1alpha1, err = management_v1alpha1.NewConsumerInstanceClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.ConsumerInstance: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.ConsumerInstance: %s", err))
 	}
 	s.ConsumerSubscriptionDefinitionManagementV1alpha1, err = management_v1alpha1.NewConsumerSubscriptionDefinitionClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.ConsumerSubscriptionDefinition: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.ConsumerSubscriptionDefinition: %s", err))
 	}
 	s.IntegrationManagementV1alpha1, err = management_v1alpha1.NewIntegrationClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.Integration: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.Integration: %s", err))
 	}
 	s.ResourceHookManagementV1alpha1, err = management_v1alpha1.NewResourceHookClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.ResourceHook: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.ResourceHook: %s", err))
 	}
 	s.K8SClusterManagementV1alpha1, err = management_v1alpha1.NewK8SClusterClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.K8SCluster: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.K8SCluster: %s", err))
 	}
 	s.K8SResourceManagementV1alpha1, err = management_v1alpha1.NewK8SResourceClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.K8SResource: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.K8SResource: %s", err))
 	}
 	s.ResourceDiscoveryManagementV1alpha1, err = management_v1alpha1.NewResourceDiscoveryClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.ResourceDiscovery: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.ResourceDiscovery: %s", err))
 	}
 	s.MeshManagementV1alpha1, err = management_v1alpha1.NewMeshClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.Mesh: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.Mesh: %s", err))
 	}
 	s.SpecDiscoveryManagementV1alpha1, err = management_v1alpha1.NewSpecDiscoveryClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.SpecDiscovery: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.SpecDiscovery: %s", err))
 	}
 	s.APISpecManagementV1alpha1, err = management_v1alpha1.NewAPISpecClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.APISpec: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.APISpec: %s", err))
 	}
 	s.MeshWorkloadManagementV1alpha1, err = management_v1alpha1.NewMeshWorkloadClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.MeshWorkload: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.MeshWorkload: %s", err))
 	}
 	s.MeshServiceManagementV1alpha1, err = management_v1alpha1.NewMeshServiceClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.MeshService: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.MeshService: %s", err))
 	}
 	s.MeshDiscoveryManagementV1alpha1, err = management_v1alpha1.NewMeshDiscoveryClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.MeshDiscovery: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.MeshDiscovery: %s", err))
 	}
 	s.AssetMappingTemplateManagementV1alpha1, err = management_v1alpha1.NewAssetMappingTemplateClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.AssetMappingTemplate: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.AssetMappingTemplate: %s", err))
 	}
 	s.AssetMappingManagementV1alpha1, err = management_v1alpha1.NewAssetMappingClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.AssetMapping: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.AssetMapping: %s", err))
 	}
 	s.AccessRequestDefinitionManagementV1alpha1, err = management_v1alpha1.NewAccessRequestDefinitionClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.AccessRequestDefinition: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.AccessRequestDefinition: %s", err))
 	}
 	s.AccessRequestManagementV1alpha1, err = management_v1alpha1.NewAccessRequestClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.AccessRequest: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.AccessRequest: %s", err))
 	}
 	s.WebhookManagementV1alpha1, err = management_v1alpha1.NewWebhookClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.Webhook: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.Webhook: %s", err))
 	}
 	s.SecretManagementV1alpha1, err = management_v1alpha1.NewSecretClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.Secret: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/management/v1alpha1.Secret: %s", err))
 	}
 	s.StageCatalogV1alpha1, err = catalog_v1alpha1.NewStageClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.Stage: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.Stage: %s", err))
 	}
 	s.AssetCatalogV1alpha1, err = catalog_v1alpha1.NewAssetClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.Asset: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.Asset: %s", err))
 	}
 	s.AssetReleaseCatalogV1alpha1, err = catalog_v1alpha1.NewAssetReleaseClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.AssetRelease: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.AssetRelease: %s", err))
 	}
 	s.ReleaseTagCatalogV1alpha1, err = catalog_v1alpha1.NewReleaseTagClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.ReleaseTag: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.ReleaseTag: %s", err))
 	}
 	s.AssetResourceCatalogV1alpha1, err = catalog_v1alpha1.NewAssetResourceClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.AssetResource: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.AssetResource: %s", err))
 	}
 	s.AssetRequestDefinitionCatalogV1alpha1, err = catalog_v1alpha1.NewAssetRequestDefinitionClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.AssetRequestDefinition: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.AssetRequestDefinition: %s", err))
 	}
 	s.AssetRequestCatalogV1alpha1, err = catalog_v1alpha1.NewAssetRequestClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.AssetRequest: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.AssetRequest: %s", err))
 	}
 	s.DocumentCatalogV1alpha1, err = catalog_v1alpha1.NewDocumentClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.Document: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/catalog/v1alpha1.Document: %s", err))
 	}
 	s.ResourceGroupDefinitionsV1alpha1, err = definitions_v1alpha1.NewResourceGroupClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/definitions/v1alpha1.ResourceGroup: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/definitions/v1alpha1.ResourceGroup: %s", err))
 	}
 	s.ResourceDefinitionDefinitionsV1alpha1, err = definitions_v1alpha1.NewResourceDefinitionClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/definitions/v1alpha1.ResourceDefinition: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/definitions/v1alpha1.ResourceDefinition: %s", err))
 	}
 	s.ResourceDefinitionVersionDefinitionsV1alpha1, err = definitions_v1alpha1.NewResourceDefinitionVersionClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/definitions/v1alpha1.ResourceDefinitionVersion: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/definitions/v1alpha1.ResourceDefinitionVersion: %s", err))
 	}
 	s.CommandLineInterfaceDefinitionsV1alpha1, err = definitions_v1alpha1.NewCommandLineInterfaceClient(b)
 	if err != nil {
-		panic(fmt.Sprintf("Failed to create client for github.com/Axway/agent-sdk/pkg/apic/apiserver/clients/definitions/v1alpha1.CommandLineInterface: %s", err))
+		panic(fmt.Sprintf("Failed to create client for github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/clients/definitions/v1alpha1.CommandLineInterface: %s", err))
 	}
 	return s
 }

@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	corecfg "github.com/Axway/agent-sdk/pkg/config"
+	corecfg "github.com/solace-iot-team/agent-sdk/pkg/config"
 	"github.com/stretchr/testify/assert"
 )
 

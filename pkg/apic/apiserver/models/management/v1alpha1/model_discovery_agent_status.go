@@ -12,7 +12,7 @@ package v1alpha1
 import (
 	// GENERATE: The following code has been modified after code generation
 	// 	"time"
-	time "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
+	time "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/api/v1"
 )
 
 // DiscoveryAgentStatus struct for DiscoveryAgentStatus

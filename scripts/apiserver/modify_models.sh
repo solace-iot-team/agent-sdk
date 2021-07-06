@@ -51,12 +51,12 @@ go fmt ${MODEL_PATH}/model_consumer_instance_spec.go
 
 ######################
 # Update any time imports in the models, we want to turn "time" into
-# time "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1" 
+# time "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/api/v1"
 ######################
 MODELS=`find pkg/apic/apiserver/models -type f -name "model_*.go"`
 
 SEARCH="\s*\"time\"$"
-REPLACE="time \"github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1\""
+REPLACE="time \"github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/api/v1\""
 for file in ${MODELS}; do
     if grep -e ${SEARCH} ${file} >> /dev/null; then
         # add a comment to the code
@@ -73,7 +73,7 @@ done
 
 ######################
 # Update any structure with Owner to have omitempty
-# time "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1" 
+# time "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/api/v1"
 ######################
 FILES=`find pkg/apic/apiserver/models -type f -name "*.go"`
 

@@ -7,15 +7,15 @@ import (
 	"strconv"
 	"strings"
 
-	coreapi "github.com/Axway/agent-sdk/pkg/api"
-	apiv1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
-	"github.com/Axway/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
-	"github.com/Axway/agent-sdk/pkg/apic/auth"
-	corecfg "github.com/Axway/agent-sdk/pkg/config"
-	"github.com/Axway/agent-sdk/pkg/util/errors"
-	utilerrors "github.com/Axway/agent-sdk/pkg/util/errors"
-	hc "github.com/Axway/agent-sdk/pkg/util/healthcheck"
-	"github.com/Axway/agent-sdk/pkg/util/log"
+	coreapi "github.com/solace-iot-team/agent-sdk/pkg/api"
+	apiv1 "github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/api/v1"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
+	"github.com/solace-iot-team/agent-sdk/pkg/apic/auth"
+	corecfg "github.com/solace-iot-team/agent-sdk/pkg/config"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/errors"
+	utilerrors "github.com/solace-iot-team/agent-sdk/pkg/util/errors"
+	hc "github.com/solace-iot-team/agent-sdk/pkg/util/healthcheck"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/log"
 )
 
 // constants for auth policy types

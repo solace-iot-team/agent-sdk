@@ -6,7 +6,7 @@ import (
 
 	guuid "github.com/google/uuid"
 
-	log "github.com/Axway/agent-sdk/pkg/util/log"
+	log "github.com/solace-iot-team/agent-sdk/pkg/util/log"
 )
 
 var notifiers map[string]Notifier

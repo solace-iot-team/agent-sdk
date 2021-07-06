@@ -5,9 +5,9 @@ import (
 	"errors"
 	"fmt"
 
-	log "github.com/Axway/agent-sdk/pkg/util/log"
+	log "github.com/solace-iot-team/agent-sdk/pkg/util/log"
 
-	"github.com/Axway/agent-sdk/pkg/util/exception"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/exception"
 )
 
 // TLSCipherSuite - defined type

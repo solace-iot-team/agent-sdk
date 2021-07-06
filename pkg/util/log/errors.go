@@ -1,6 +1,6 @@
 package log
 
-import configerrors "github.com/Axway/agent-sdk/pkg/util/errors"
+import configerrors "github.com/solace-iot-team/agent-sdk/pkg/util/errors"
 
 // Log Config Errors
 var (

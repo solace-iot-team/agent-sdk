@@ -11,11 +11,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Axway/agent-sdk/pkg/api"
-	corecfg "github.com/Axway/agent-sdk/pkg/config"
-	"github.com/Axway/agent-sdk/pkg/util/errors"
-	"github.com/Axway/agent-sdk/pkg/util/log"
 	"github.com/google/uuid"
+	"github.com/solace-iot-team/agent-sdk/pkg/api"
+	corecfg "github.com/solace-iot-team/agent-sdk/pkg/config"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/errors"
+	"github.com/solace-iot-team/agent-sdk/pkg/util/log"
 )
 
 var globalHealthChecker *healthChecker
