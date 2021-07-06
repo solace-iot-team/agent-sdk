@@ -21,6 +21,7 @@ type SubscriptionManager interface {
 	getPublisher() notification.Notifier
 	getProcessorMap() map[SubscriptionState][]SubscriptionProcessor
 	OnConfigChange(apicClient *ServiceClient)
+	Debug()
 }
 
 // subscriptionManager -
@@ -58,6 +59,10 @@ func newSubscriptionManager(apicClient *ServiceClient) SubscriptionManager {
 	}
 
 	return subscriptionMgr
+}
+
+func (sm *subscriptionManager) Debug() {
+	log.Info("Debug triggered")
 }
 
 // OnConfigChange - config change handler
