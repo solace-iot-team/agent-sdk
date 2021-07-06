@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	coreapi "github.com/solace-iot-team/agent-sdk/pkg/api"
+	utilerrors "github.com/solace-iot-team/agent-sdk/pkg/util/errors"
 	"net/http"
 	"strconv"
 
@@ -151,4 +153,32 @@ func (c *ServiceClient) getRevisionDefinitionType(serviceBody ServiceBody) strin
 		return Unstructured
 	}
 	return serviceBody.ResourceType
+}
+
+func (c *ServiceClient) GetAPIRevisionByName(revisionName string) (*v1alpha1.APIServiceRevision, error) {
+	headers, err := c.createHeader()
+	if err != nil {
+		return nil, err
+	}
+
+	request := coreapi.Request{
+		Method:  coreapi.GET,
+		URL:     c.cfg.GetRevisionsURL() + "/" + revisionName,
+		Headers: headers,
+	}
+
+	response, err := c.apiClient.Send(request)
+	if err != nil {
+		return nil, err
+	}
+	if response.Code != http.StatusOK {
+		if response.Code != http.StatusNotFound {
+			responseErr := readResponseErrors(response.Code, response.Body)
+			return nil, utilerrors.Wrap(ErrRequestQuery, responseErr)
+		}
+		return nil, nil
+	}
+	apiRevision := new(v1alpha1.APIServiceRevision)
+	json.Unmarshal(response.Body, apiRevision)
+	return apiRevision, nil
 }

@@ -21,7 +21,6 @@ type SubscriptionManager interface {
 	getPublisher() notification.Notifier
 	getProcessorMap() map[SubscriptionState][]SubscriptionProcessor
 	OnConfigChange(apicClient *ServiceClient)
-	Debug()
 }
 
 // subscriptionManager -
@@ -59,10 +58,6 @@ func newSubscriptionManager(apicClient *ServiceClient) SubscriptionManager {
 	}
 
 	return subscriptionMgr
-}
-
-func (sm *subscriptionManager) Debug() {
-	log.Info("Debug triggered")
 }
 
 // OnConfigChange - config change handler
@@ -116,7 +111,8 @@ func (sm *subscriptionManager) processSubscriptions() {
 				if !sm.isItemOnLocklist(id) {
 					sm.addLocklistItem(id)
 					err := sm.preprocessSubscription(&subscription)
-					if err == nil && subscription.ApicID != "" && subscription.GetRemoteAPIID() != "" {
+					if err == nil && subscription.ApicID != "" {
+						//if err == nil && subscription.ApicID != "" && subscription.GetRemoteAPIID() != "" {
 						sm.invokeProcessor(subscription)
 					}
 					sm.removeLocklistItem(id)
@@ -152,12 +148,30 @@ func (sm *subscriptionManager) preprocessSubscription(subscription *CentralSubsc
 func (sm *subscriptionManager) preprocessSubscriptionForConsumerInstance(subscription *CentralSubscription, consumerInstanceName string) {
 	consumerInstance, err := sm.apicClient.getAPIServerConsumerInstance(consumerInstanceName, nil)
 	if err == nil {
+		sm.preprocessSubscriptionForAPIServiceReferences(subscription, consumerInstance)
 		if sm.apicClient.cfg.IsPublishToEnvironmentAndCatalogMode() {
 			resource, _ := consumerInstance.AsInstance()
 			sm.setSubscriptionInfo(subscription, resource)
 		} else {
 			log.Debug("Preprocess subscription for environment mode only")
 			sm.preprocessSubscriptionForAPIServiceInstance(subscription, consumerInstance)
+		}
+	}
+}
+
+func (sm *subscriptionManager) preprocessSubscriptionForAPIServiceReferences(subscription *CentralSubscription, consumerInstance *v1alpha1.ConsumerInstance) {
+	if consumerInstance != nil && len(consumerInstance.Metadata.References) > 0 {
+		for _, reference := range consumerInstance.Metadata.References {
+			if reference.Kind == "APIServiceInstance" {
+				subscription.ApiServiceInstanceName = reference.Name
+			}
+			if reference.Kind == "APIService" {
+				subscription.ApiServiceName = reference.Name
+			}
+			if reference.Kind == "APIServiceRevision" {
+				subscription.ApiServiceRevisionName = reference.Name
+			}
+
 		}
 	}
 }
