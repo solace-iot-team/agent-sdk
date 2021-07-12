@@ -44,6 +44,7 @@ type Subscription interface {
 	GetAPIServiceInstanceName() string
 	GetAPIServiceName() string
 	GetAPIServiceRevisionName() string
+	GetOwningTeamId() string
 	GetState() SubscriptionState
 	GetPropertyValue(propertyKey string) string
 	UpdateState(newState SubscriptionState, description string) error
@@ -64,6 +65,11 @@ type CentralSubscription struct {
 	ApiServiceName          string
 	ApiServiceInstanceName  string
 	ApiServiceRevisionName  string
+}
+
+// GetOwningTeamId - Returns OwningTeamId of subscription.
+func (s *CentralSubscription) GetOwningTeamId() string {
+	return s.CatalogItemSubscription.OwningTeamId
 }
 
 // GetRemoteAPIAttributes - Returns the attributes from the API that the subscription is tied to.
