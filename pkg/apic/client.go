@@ -38,6 +38,8 @@ type SubscriptionValidator func(subscription Subscription) bool
 
 // Client - interface
 type Client interface {
+	//TODO remove DumpToken
+	DumpToken() string
 	SetTokenGetter(tokenRequester auth.PlatformTokenGetter)
 	PublishService(serviceBody ServiceBody) (*v1alpha1.APIService, error)
 	RegisterSubscriptionWebhook() error
@@ -187,6 +189,13 @@ func getAPIResponseErrorString(apiError APIError) string {
 	return errStr
 }
 
+func (c *ServiceClient) DumpToken() string {
+	token, err := c.tokenRequester.GetToken()
+	if err != nil {
+		return "NO-TOKEN"
+	}
+	return token
+}
 func (c *ServiceClient) createHeader() (map[string]string, error) {
 	token, err := c.tokenRequester.GetToken()
 	if err != nil {
@@ -247,7 +256,6 @@ func (c *ServiceClient) checkPlatformHealth() error {
 }
 
 func (c *ServiceClient) checkAPIServerHealth() error {
-
 	headers, err := c.createHeader()
 	if err != nil {
 		return errors.Wrap(ErrAuthenticationCall, err.Error())
