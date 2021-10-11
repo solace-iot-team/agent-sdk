@@ -41,6 +41,10 @@ type Subscription interface {
 	GetRemoteAPIStage() string
 	GetCatalogItemID() string
 	GetCreatedUserID() string
+	GetAPIServiceInstanceName() string
+	GetAPIServiceName() string
+	GetAPIServiceRevisionName() string
+	GetOwningTeamId() string
 	GetState() SubscriptionState
 	GetPropertyValue(propertyKey string) string
 	UpdateState(newState SubscriptionState, description string) error
@@ -58,6 +62,9 @@ type CentralSubscription struct {
 	RemoteAPIStage          string                      `json:"-"`
 	apicClient              *ServiceClient
 	RemoteAPIAttributes     map[string]string
+	ApiServiceName          string
+	ApiServiceInstanceName  string
+	ApiServiceRevisionName  string
 }
 
 // GetRemoteAPIAttributes - Returns the attributes from the API that the subscription is tied to.
@@ -361,4 +368,64 @@ func (s *CentralSubscription) UpdatePropertyValues(values map[string]interface{}
 		return ErrSubscriptionResp.FormatError(response.Code)
 	}
 	return nil
+}
+
+// GetOwningTeamId - Returns OwningTeamId of subscription.
+func (s *CentralSubscription) GetOwningTeamId() string {
+	return s.CatalogItemSubscription.OwningTeamId
+}
+
+// GetAPIServiceInstanceName - Returns APIServiceInstanceName.
+func (s *CentralSubscription) GetAPIServiceInstanceName() string {
+	return s.ApiServiceInstanceName
+}
+
+// GetAPIServiceName - Returns APIServiceName.
+func (s *CentralSubscription) GetAPIServiceName() string {
+	return s.ApiServiceName
+}
+
+// GetAPIServiceRevisionName - Returns APIServiceRevisionName.
+func (s *CentralSubscription) GetAPIServiceRevisionName() string {
+	return s.ApiServiceRevisionName
+}
+
+// GetOwningTeamId - Returns OwningTeamId of subscription.
+func (s *CentralSubscription) GetOwningTeamId() string {
+	return s.CatalogItemSubscription.OwningTeamId
+}
+
+// GetAPIServiceInstanceName - Returns APIServiceInstanceName.
+func (s *CentralSubscription) GetAPIServiceInstanceName() string {
+	return s.ApiServiceInstanceName
+}
+
+// GetAPIServiceName - Returns APIServiceName.
+func (s *CentralSubscription) GetAPIServiceName() string {
+	return s.ApiServiceName
+}
+
+// GetAPIServiceRevisionName - Returns APIServiceRevisionName.
+func (s *CentralSubscription) GetAPIServiceRevisionName() string {
+	return s.ApiServiceRevisionName
+}
+
+// GetOwningTeamId - Returns OwningTeamId of subscription.
+func (s *CentralSubscription) GetOwningTeamId() string {
+	return s.CatalogItemSubscription.OwningTeamId
+}
+
+// GetAPIServiceInstanceName - Returns APIServiceInstanceName.
+func (s *CentralSubscription) GetAPIServiceInstanceName() string {
+	return s.ApiServiceInstanceName
+}
+
+// GetAPIServiceName - Returns APIServiceName.
+func (s *CentralSubscription) GetAPIServiceName() string {
+	return s.ApiServiceName
+}
+
+// GetAPIServiceRevisionName - Returns APIServiceRevisionName.
+func (s *CentralSubscription) GetAPIServiceRevisionName() string {
+	return s.ApiServiceRevisionName
 }
