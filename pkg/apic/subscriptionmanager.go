@@ -179,40 +179,6 @@ func (sm *subscriptionManager) preprocessSubscriptionForAPIServiceReferences(sub
 	}
 }
 
-func (sm *subscriptionManager) preprocessSubscriptionForAPIServiceReferences(subscription *CentralSubscription, consumerInstance *v1alpha1.ConsumerInstance) {
-	if consumerInstance != nil && len(consumerInstance.Metadata.References) > 0 {
-		for _, reference := range consumerInstance.Metadata.References {
-			if reference.Kind == "APIServiceInstance" {
-				subscription.ApiServiceInstanceName = reference.Name
-			}
-			if reference.Kind == "APIService" {
-				subscription.ApiServiceName = reference.Name
-			}
-			if reference.Kind == "APIServiceRevision" {
-				subscription.ApiServiceRevisionName = reference.Name
-			}
-
-		}
-	}
-}
-
-func (sm *subscriptionManager) preprocessSubscriptionForAPIServiceReferences(subscription *CentralSubscription, consumerInstance *v1alpha1.ConsumerInstance) {
-	if consumerInstance != nil && len(consumerInstance.Metadata.References) > 0 {
-		for _, reference := range consumerInstance.Metadata.References {
-			if reference.Kind == "APIServiceInstance" {
-				subscription.ApiServiceInstanceName = reference.Name
-			}
-			if reference.Kind == "APIService" {
-				subscription.ApiServiceName = reference.Name
-			}
-			if reference.Kind == "APIServiceRevision" {
-				subscription.ApiServiceRevisionName = reference.Name
-			}
-
-		}
-	}
-}
-
 func (sm *subscriptionManager) preprocessSubscriptionForAPIServiceInstance(subscription *CentralSubscription, consumerInstance *v1alpha1.ConsumerInstance) {
 	if consumerInstance != nil && len(consumerInstance.Metadata.References) > 0 {
 		for _, reference := range consumerInstance.Metadata.References {
