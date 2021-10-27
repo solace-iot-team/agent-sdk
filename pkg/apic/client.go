@@ -58,6 +58,8 @@ type Client interface {
 	DeleteServiceByAPIID(externalAPIID string) error
 	GetConsumerInstanceByID(consumerInstanceID string) (*v1alpha1.ConsumerInstance, error)
 	GetConsumerInstancesByExternalAPIID(externalAPIID string) ([]*v1alpha1.ConsumerInstance, error)
+	// TODO JT
+	GetConsumerInstancesByAttributeQuery(query string) ([]*v1alpha1.ConsumerInstance, error)
 	UpdateConsumerInstanceSubscriptionDefinition(externalAPIID, subscriptionDefinitionName string) error
 	GetUserEmailAddress(ID string) (string, error)
 	GetUserName(ID string) (string, error)

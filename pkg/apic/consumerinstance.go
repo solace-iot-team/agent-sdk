@@ -329,6 +329,48 @@ func (c *ServiceClient) getConsumerInstancesByExternalAPIID(externalAPIID string
 	return consumerInstances, nil
 }
 
+// TODO JT
+// getConsumerInstancesByAttributeQuery
+func (c *ServiceClient) getConsumerInstancesByAttributeQuery(query string) ([]*v1alpha1.ConsumerInstance, error) {
+	headers, err := c.createHeader()
+	if err != nil {
+		return nil, err
+	}
+
+	log.Tracef("Get consumer instance by attribute query: %s", query)
+
+	params := map[string]string{
+		"query": query,
+	}
+	request := coreapi.Request{
+		Method:      coreapi.GET,
+		URL:         c.cfg.GetConsumerInstancesURL(),
+		Headers:     headers,
+		QueryParams: params,
+	}
+
+	response, err := c.apiClient.Send(request)
+
+	if err != nil {
+		return nil, err
+	}
+	if !(response.Code == http.StatusOK) {
+		responseErr := readResponseErrors(response.Code, response.Body)
+		return nil, utilerrors.Wrap(ErrRequestQuery, responseErr)
+	}
+
+	consumerInstances := make([]*v1alpha1.ConsumerInstance, 0)
+	err = json.Unmarshal(response.Body, &consumerInstances)
+	if err != nil {
+		return nil, err
+	}
+	if len(consumerInstances) == 0 {
+		return nil, errors.New("Unable to find consumerInstance using query: " + query)
+	}
+
+	return consumerInstances, nil
+}
+
 // getConsumerInstanceByID
 func (c *ServiceClient) getConsumerInstanceByID(instanceID string) (*v1alpha1.ConsumerInstance, error) {
 	headers, err := c.createHeader()
