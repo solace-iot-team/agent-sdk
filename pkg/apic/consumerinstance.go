@@ -364,9 +364,9 @@ func (c *ServiceClient) getConsumerInstancesByAttributeQuery(query string) ([]*v
 	if err != nil {
 		return nil, err
 	}
-	if len(consumerInstances) == 0 {
-		return nil, errors.New("Unable to find consumerInstance using query: " + query)
-	}
+	//if len(consumerInstances) == 0 {
+	//		return nil, errors.New("Unable to find consumerInstance using query: " + query)
+	//}
 
 	return consumerInstances, nil
 }

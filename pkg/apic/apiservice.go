@@ -190,3 +190,33 @@ func (c *ServiceClient) GetAPIServiceByName(serviceName string) (*v1alpha1.APISe
 	json.Unmarshal(response.Body, apiService)
 	return apiService, nil
 }
+
+// GetAPIServiceByName - Returns the API service based on its name
+func (c *ServiceClient) GetApiServicesByQuery(query string) ([]*v1alpha1.APIService, error) {
+	headers, err := c.createHeader()
+	if err != nil {
+		return nil, err
+	}
+	params := map[string]string{
+		"query": query,
+	}
+	request := coreapi.Request{
+		Method:      coreapi.GET,
+		URL:         c.cfg.GetServicesURL(),
+		Headers:     headers,
+		QueryParams: params,
+	}
+	response, err := c.apiClient.Send(request)
+	if err != nil {
+		return nil, err
+	}
+	if response.Code != http.StatusOK {
+		if response.Code != http.StatusNotFound {
+			responseErr := readResponseErrors(response.Code, response.Body)
+			return nil, utilerrors.Wrap(ErrRequestQuery, responseErr)
+		}
+		return nil, nil
+	}
+	apiServices := make([]*v1alpha1.APIService, 0)
+	return apiServices, nil
+}

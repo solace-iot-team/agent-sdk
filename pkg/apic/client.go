@@ -3,13 +3,13 @@ package apic
 import (
 	"encoding/json"
 	"fmt"
+	catalog "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/catalog/v1alpha1"
 	"net/http"
 	"strconv"
 	"strings"
 
 	coreapi "github.com/Axway/agent-sdk/pkg/api"
 	apiv1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
-	catalog "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/catalog/v1alpha1"
 	"github.com/Axway/agent-sdk/pkg/apic/apiserver/models/management/v1alpha1"
 	"github.com/Axway/agent-sdk/pkg/apic/auth"
 	"github.com/Axway/agent-sdk/pkg/cache"
@@ -59,7 +59,7 @@ type Client interface {
 	GetConsumerInstanceByID(consumerInstanceID string) (*v1alpha1.ConsumerInstance, error)
 	GetConsumerInstancesByExternalAPIID(externalAPIID string) ([]*v1alpha1.ConsumerInstance, error)
 	// TODO JT
-	GetConsumerInstancesByAttributeQuery(query string) ([]*v1alpha1.ConsumerInstance, error)
+	GetConsumerInstancesByQuery(query string) ([]*v1alpha1.ConsumerInstance, error)
 	UpdateConsumerInstanceSubscriptionDefinition(externalAPIID, subscriptionDefinitionName string) error
 	GetUserEmailAddress(ID string) (string, error)
 	GetUserName(ID string) (string, error)
@@ -76,6 +76,8 @@ type Client interface {
 	GetAPIV1ResourceInstances(queryParams map[string]string, URL string) ([]*apiv1.ResourceInstance, error)
 	GetAPIV1ResourceInstancesWithPageSize(queryParams map[string]string, URL string, pageSize int) ([]*apiv1.ResourceInstance, error)
 	GetAPIServiceByName(serviceName string) (*v1alpha1.APIService, error)
+	// TODO JT
+	GetApiServicesByQuery(query string) ([]*v1alpha1.APIService, error)
 	GetAPIServiceInstanceByName(serviceInstanceName string) (*v1alpha1.APIServiceInstance, error)
 	GetAPIRevisionByName(serviceRevisionName string) (*v1alpha1.APIServiceRevision, error)
 	CreateCategory(categoryName string) (*catalog.Category, error)
