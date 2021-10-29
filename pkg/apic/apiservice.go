@@ -218,5 +218,6 @@ func (c *ServiceClient) GetApiServicesByQuery(query string) ([]*v1alpha1.APIServ
 		return nil, nil
 	}
 	apiServices := make([]*v1alpha1.APIService, 0)
+	json.Unmarshal(response.Body, apiServices)
 	return apiServices, nil
 }
