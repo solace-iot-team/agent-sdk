@@ -36,6 +36,7 @@ type SubscriptionNotification struct {
 	ClientSecret    string                 `json:"clientSecret,omitempty"`
 	AuthTemplate    string                 `json:"authtemplate,omitempty"`
 	IsAPIKey        bool                   `json:"isAPIKey,omitempty"`
+	ApiManagerId    string                 `json:"apiManagerId,omitempty"`
 	apiClient       coreapi.Client
 }
 
@@ -221,6 +222,7 @@ func (s *SubscriptionNotification) BuildSMTPMessage(template *corecfg.EmailTempl
 		ClientSecret:    s.ClientSecret,
 		AuthTemplate:    s.AuthTemplate,
 		IsAPIKey:        s.IsAPIKey,
+		ApiManagerId:    s.ApiManagerId,
 	}
 
 	// Shouldn't have to check error from ValidateSubscriptionConfigOnNotification since startup passed the subscription validation check

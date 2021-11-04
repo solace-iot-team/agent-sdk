@@ -60,6 +60,9 @@ type Client interface {
 	GetConsumerInstancesByExternalAPIID(externalAPIID string) ([]*v1alpha1.ConsumerInstance, error)
 	// TODO JT
 	GetConsumerInstancesByQuery(query string) ([]*v1alpha1.ConsumerInstance, error)
+	// TODO JT
+	UpdateConsumerInstanceSubscriptionDefinitionByConsumerInstanceId(consumerInstanceId, subscriptionDefinitionName string) error
+
 	UpdateConsumerInstanceSubscriptionDefinition(externalAPIID, subscriptionDefinitionName string) error
 	GetUserEmailAddress(ID string) (string, error)
 	GetUserName(ID string) (string, error)

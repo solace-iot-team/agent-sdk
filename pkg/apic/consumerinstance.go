@@ -288,6 +288,32 @@ func (c *ServiceClient) UpdateConsumerInstanceSubscriptionDefinition(externalAPI
 	return err
 }
 
+//UpdateConsumerInstanceSubscriptionDefinitionByConsumerInstanceId -
+func (c *ServiceClient) UpdateConsumerInstanceSubscriptionDefinitionByConsumerInstanceId(consumerInstanceId, subscriptionDefinitionName string) error {
+	consumerInstance, err := c.getConsumerInstanceByID(consumerInstanceId)
+	if err != nil {
+		return err
+	}
+
+	// Update the subscription definition
+	if consumerInstance.Spec.Subscription.SubscriptionDefinition == subscriptionDefinitionName {
+		return nil // no updates to be made
+	}
+
+	consumerInstance.ResourceMeta.Metadata.ResourceVersion = ""
+	consumerInstance.Spec.Subscription.SubscriptionDefinition = subscriptionDefinitionName
+
+	consumerInstanceURL := c.cfg.GetConsumerInstancesURL() + "/" + consumerInstance.Name
+	buffer, err := json.Marshal(consumerInstance)
+	if err != nil {
+		return err
+	}
+
+	_, err = c.apiServiceDeployAPI(http.MethodPut, consumerInstanceURL, buffer)
+
+	return err
+}
+
 // getConsumerInstancesByExternalAPIID
 func (c *ServiceClient) getConsumerInstancesByExternalAPIID(externalAPIID string) ([]*v1alpha1.ConsumerInstance, error) {
 	headers, err := c.createHeader()
