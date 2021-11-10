@@ -79,7 +79,7 @@ func (a *AuthConfiguration) validatePrivateKey() {
 		}
 		// Validate that the file is readable
 		if _, err := os.Open(a.GetPrivateKey()); err != nil {
-			log.Warn("CENTRAL_AUTH_PRIVATEKEY_DATA is not readable")
+			log.Warn("CENTRAL_AUTH_PRIVATEKEY_DATA is not readable ")
 			exception.Throw(ErrReadingKeyFile.FormatError("private key", a.GetPrivateKey()))
 		}
 	}
