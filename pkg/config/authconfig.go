@@ -1,6 +1,7 @@
 package config
 
 import (
+	"github.com/Axway/agent-sdk/pkg/util/log"
 	"io/ioutil"
 	"net/url"
 	"os"
@@ -70,12 +71,15 @@ func (a *AuthConfiguration) validatePrivateKey() {
 		if !fileExists(a.GetPrivateKey()) {
 			privateKeyData := os.Getenv("CENTRAL_AUTH_PRIVATEKEY_DATA")
 			if privateKeyData == "" {
+				//todo JT REMOVE
+				log.Warn("CENTRAL_AUTH_PRIVATEKEY_DATA is empty")
 				exception.Throw(ErrBadConfig.FormatError(pathAuthPrivateKey))
 			}
 			saveKeyData(a.GetPrivateKey(), privateKeyData)
 		}
 		// Validate that the file is readable
 		if _, err := os.Open(a.GetPrivateKey()); err != nil {
+			log.Warn("CENTRAL_AUTH_PRIVATEKEY_DATA is not readable")
 			exception.Throw(ErrReadingKeyFile.FormatError("private key", a.GetPrivateKey()))
 		}
 	}
