@@ -93,12 +93,16 @@ func (a *AuthConfiguration) validatePublicKey() {
 		if !fileExists(a.GetPublicKey()) {
 			publicKeyData := os.Getenv("CENTRAL_AUTH_PUBLICKEY_DATA")
 			if publicKeyData == "" {
+				//todo JT REMOVE
+				log.Warn("CENTRAL_AUTH_PUBLICKEY_DATA is empty")
 				exception.Throw(ErrBadConfig.FormatError(pathAuthPublicKey))
 			}
 			saveKeyData(a.GetPublicKey(), publicKeyData)
 		}
 		// Validate that the file is readable
 		if _, err := os.Open(a.GetPublicKey()); err != nil {
+			// todo JT REMOVE
+			log.Warn("CENTRAL_AUTH_PUBLICKEY_DATA is not readable ")
 			exception.Throw(ErrReadingKeyFile.FormatError("public key", a.GetPublicKey()))
 		}
 	}
