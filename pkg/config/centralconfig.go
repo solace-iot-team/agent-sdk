@@ -127,12 +127,14 @@ type CentralConfig interface {
 	GetProxyURL() string
 	GetPollInterval() time.Duration
 	GetReportActivityFrequency() time.Duration
+	GetJobExecutionTimeout() time.Duration
 	GetClientTimeout() time.Duration
 	GetAPIServiceRevisionPattern() string
 	GetCatalogItemByIDURL(catalogItemID string) string
 	GetAppendEnvironmentToTitle() bool
 	GetUsageReportingConfig() UsageReportingConfig
 	GetUpdateFromAPIServer() bool
+	IsVersionCheckerEnabled() bool
 }
 
 // CentralConfiguration - Structure to hold the central config
@@ -152,6 +154,7 @@ type CentralConfiguration struct {
 	APIServerVersion          string               `config:"apiServerVersion"`
 	TagsToPublish             string               `config:"additionalTags"`
 	AppendEnvironmentToTitle  bool                 `config:"appendEnvironmentToTitle"`
+	VersionChecker            bool                 `config:"versionChecker"`
 	UpdateFromAPIServer       bool                 `config:"updateFromAPIServer"`
 	Auth                      AuthConfig           `config:"auth"`
 	TLS                       TLSConfig            `config:"ssl"`
@@ -162,6 +165,7 @@ type CentralConfiguration struct {
 	ProxyURL                  string               `config:"proxyUrl"`
 	SubscriptionConfiguration SubscriptionConfig   `config:"subscriptions"`
 	UsageReporting            UsageReportingConfig `config:"usageReporting"`
+	JobExecutionTimeout       time.Duration        `config:"jobTimeout"`
 	environmentID             string
 	teamID                    string
 	isAxwayManaged            bool
@@ -181,8 +185,10 @@ func NewCentralConfig(agentType AgentType) CentralConfig {
 		SubscriptionConfiguration: NewSubscriptionConfig(),
 		AppendEnvironmentToTitle:  true,
 		UpdateFromAPIServer:       false,
+		VersionChecker:            true,
 		ReportActivityFrequency:   5 * time.Minute,
 		UsageReporting:            NewUsageReporting(),
+		JobExecutionTimeout:       5 * time.Minute,
 	}
 }
 
@@ -411,6 +417,11 @@ func (c *CentralConfiguration) GetReportActivityFrequency() time.Duration {
 	return c.ReportActivityFrequency
 }
 
+// GetJobExecutionTimeout - Returns the max time a job execution can run before considered failed
+func (c *CentralConfiguration) GetJobExecutionTimeout() time.Duration {
+	return c.JobExecutionTimeout
+}
+
 // GetClientTimeout - Returns the interval for http client timeouts
 func (c *CentralConfiguration) GetClientTimeout() time.Duration {
 	return c.ClientTimeout
@@ -429,6 +440,11 @@ func (c *CentralConfiguration) GetAppendEnvironmentToTitle() bool {
 // GetUpdateFromAPIServer -
 func (c *CentralConfiguration) GetUpdateFromAPIServer() bool {
 	return c.UpdateFromAPIServer
+}
+
+// IsVersionCheckerEnabled -
+func (c *CentralConfiguration) IsVersionCheckerEnabled() bool {
+	return c.VersionChecker
 }
 
 // GetUsageReportingConfig -
@@ -467,6 +483,8 @@ const (
 	pathAdditionalTags            = "central.additionalTags"
 	pathAppendEnvironmentToTitle  = "central.appendEnvironmentToTitle"
 	pathUpdateFromAPIServer       = "central.updateFromAPIServer"
+	pathVersionChecker            = "central.versionChecker"
+	pathJobTimeout                = "central.jobTimeout"
 )
 
 // ValidateCfg - Validates the config, implementing IConfigInterface
@@ -511,6 +529,15 @@ func (c *CentralConfiguration) validateConfig() {
 		c.validatePublishToEnvironmentModeConfig()
 		c.validateDiscoveryAgentConfig()
 	}
+	if c.GetReportActivityFrequency() <= 0 {
+		exception.Throw(ErrBadConfig.FormatError(pathReportActivityFrequency))
+	}
+	if c.GetClientTimeout() <= 0 {
+		exception.Throw(ErrBadConfig.FormatError(pathClientTimeout))
+	}
+	if c.GetJobExecutionTimeout() < 0 {
+		exception.Throw(ErrBadConfig.FormatError(pathJobTimeout))
+	}
 }
 
 func (c *CentralConfiguration) validateURL(urlString, configPath string, isURLRequired bool) {
@@ -527,12 +554,6 @@ func (c *CentralConfiguration) validateURL(urlString, configPath string, isURLRe
 func (c *CentralConfiguration) validateDiscoveryAgentConfig() {
 	if c.GetPollInterval() <= 0 {
 		exception.Throw(ErrBadConfig.FormatError(pathPollInterval))
-	}
-	if c.GetReportActivityFrequency() <= 0 {
-		exception.Throw(ErrBadConfig.FormatError(pathReportActivityFrequency))
-	}
-	if c.GetClientTimeout() <= 0 {
-		exception.Throw(ErrBadConfig.FormatError(pathClientTimeout))
 	}
 }
 
@@ -556,12 +577,6 @@ func (c *CentralConfiguration) validateTraceabilityAgentConfig() {
 	}
 	if c.GetEnvironmentName() == "" {
 		exception.Throw(ErrBadConfig.FormatError(pathEnvironment))
-	}
-	if c.GetReportActivityFrequency() <= 0 {
-		exception.Throw(ErrBadConfig.FormatError(pathReportActivityFrequency))
-	}
-	if c.GetClientTimeout() <= 0 {
-		exception.Throw(ErrBadConfig.FormatError(pathClientTimeout))
 	}
 }
 
@@ -601,6 +616,8 @@ func AddCentralConfigProperties(props properties.Properties, agentType AgentType
 	props.AddStringProperty(pathAPIServiceRevisionPattern, "{{.APIServiceName}} - {{.Date:YYYY/MM/DD}} - r {{.Revision}}", "The naming pattern for APIServiceRevision Title")
 	props.AddStringProperty(pathAPIServerVersion, "v1alpha1", "Version of the API Server")
 	props.AddBoolProperty(pathUpdateFromAPIServer, false, "Controls whether to call API Server if the API is not in the local cache")
+	props.AddBoolProperty(pathVersionChecker, true, "Controls whether the agent version checker will be enabled or not")
+	props.AddDurationProperty(pathJobTimeout, 5*time.Minute, "The max time a job execution can run before being considered as failed")
 
 	if supportsTraceability(agentType) {
 		props.AddStringProperty(pathEnvironmentID, "", "Offline Usage Reporting Only. The Environment ID the usage is associated with on Amplify Central")
@@ -636,6 +653,7 @@ func ParseCentralConfig(props properties.Properties, agentType AgentType) (Centr
 		TenantID:                  props.StringPropertyValue(pathTenantID),
 		PollInterval:              props.DurationPropertyValue(pathPollInterval),
 		ReportActivityFrequency:   props.DurationPropertyValue(pathReportActivityFrequency),
+		JobExecutionTimeout:       props.DurationPropertyValue(pathJobTimeout),
 		ClientTimeout:             props.DurationPropertyValue(pathClientTimeout),
 		APIServiceRevisionPattern: props.StringPropertyValue(pathAPIServiceRevisionPattern),
 		Environment:               props.StringPropertyValue(pathEnvironment),
@@ -660,6 +678,7 @@ func ParseCentralConfig(props properties.Properties, agentType AgentType) (Centr
 		},
 		ProxyURL:            proxyURL,
 		UpdateFromAPIServer: props.BoolPropertyValue(pathUpdateFromAPIServer),
+		VersionChecker:      props.BoolPropertyValue(pathVersionChecker),
 	}
 
 	cfg.URL = props.StringPropertyValue(pathURL)

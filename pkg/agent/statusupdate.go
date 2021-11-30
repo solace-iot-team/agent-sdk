@@ -1,6 +1,7 @@
 package agent
 
 import (
+	"sync"
 	"time"
 
 	"github.com/Axway/agent-sdk/pkg/jobs"
@@ -14,11 +15,17 @@ const (
 	immediate = "immediate status change"
 )
 
+var previousStatus string // The global previous status to be used by both update jobs
+var updateStatusMutex *sync.Mutex
+
+func init() {
+	updateStatusMutex = &sync.Mutex{}
+}
+
 type agentStatusUpdate struct {
 	jobs.Job
 	previousActivityTime  time.Time
 	currentActivityTime   time.Time
-	prevStatus            string
 	immediateStatusChange bool
 	typeOfStatusUpdate    string
 }
@@ -27,9 +34,6 @@ var periodicStatusUpdate *agentStatusUpdate
 var immediateStatusUpdate *agentStatusUpdate
 
 func (su *agentStatusUpdate) Ready() bool {
-	if runStatusUpdateCheck() != nil {
-		return false
-	}
 	// Do not start until status will be running
 	status := su.getCombinedStatus()
 	if status != AgentRunning && su.immediateStatusChange {
@@ -44,20 +48,17 @@ func (su *agentStatusUpdate) Ready() bool {
 
 func (su *agentStatusUpdate) Status() error {
 	// error out if the agent name does not exist
-	err := runStatusUpdateCheck()
-	if err != nil {
-		return err
-	}
 	return nil
 }
 
 func (su *agentStatusUpdate) Execute() error {
-	// error out if the agent name does not exist
-	err := runStatusUpdateCheck()
-	if err != nil {
-		log.Error(errors.ErrPeriodicCheck.FormatError("periodic status updater"))
-		return err
-	}
+	// only one status update should execute at a time
+	log.Tracef("get status update lock %s", su.typeOfStatusUpdate)
+	updateStatusMutex.Lock()
+	defer func() {
+		log.Tracef("return status update lock %s", su.typeOfStatusUpdate)
+		updateStatusMutex.Unlock()
+	}()
 
 	// get the status from the health check and jobs
 	status := su.getCombinedStatus()
@@ -65,26 +66,26 @@ func (su *agentStatusUpdate) Execute() error {
 
 	// Check to see if this is the immediate status change
 	// If change of status is coming FROM or TO 'unhealthy', then report this immediately
-	if su.prevStatus != status && (su.immediateStatusChange && su.prevStatus == AgentRunning || status == AgentRunning) {
-		log.Tracef("Status is changing from %s to %s. Report this change of status immediately.", su.prevStatus, status)
-		UpdateStatus(status, "")
-		su.prevStatus = status
-		return nil
-	}
-
-	// If its a periodic check, tickle last activity so that UI shows agent is still alive.  Not needed for immediate check.
-	if su.typeOfStatusUpdate == periodic {
+	if previousStatus != status && (su.immediateStatusChange && previousStatus == AgentRunning || status == AgentRunning) {
+		log.Tracef("Status is changing from %s to %s. Report this change of status immediately.", previousStatus, status)
+		UpdateStatusWithPrevious(status, previousStatus, "")
+	} else if su.typeOfStatusUpdate == periodic {
+		// If its a periodic check, tickle last activity so that UI shows agent is still alive.  Not needed for immediate check.
 		log.Debugf("%s -- Last activity updated", su.typeOfStatusUpdate)
-		UpdateStatus(status, "")
-		su.prevStatus = status
+		UpdateStatusWithPrevious(status, previousStatus, "")
 		su.previousActivityTime = su.currentActivityTime
 	}
 
+	previousStatus = status
 	return nil
 }
 
 // StartAgentStatusUpdate - starts 2 separate jobs that runs the periodic status updates and immediate status updates
 func StartAgentStatusUpdate() {
+	if err := runStatusUpdateCheck(); err != nil {
+		log.Errorf("not starting status update jobs: %s", err)
+		return
+	}
 	startPeriodicStatusUpdate()
 	startImmediateStatusUpdate()
 }

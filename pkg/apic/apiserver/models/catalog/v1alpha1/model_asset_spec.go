@@ -13,7 +13,7 @@ package v1alpha1
 type AssetSpec struct {
 	// description of the asset.
 	Description string `json:"description,omitempty"`
-	Type        string `json:"type,omitempty"`
+	Type        string `json:"type"`
 	// list of categories for the asset.
 	Categories []string `json:"categories,omitempty"`
 }
