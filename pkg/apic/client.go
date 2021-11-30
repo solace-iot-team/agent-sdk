@@ -61,7 +61,7 @@ type Client interface {
 	// TODO JT
 	GetConsumerInstancesByQuery(query string) ([]*v1alpha1.ConsumerInstance, error)
 	// TODO JT
-	UpdateConsumerInstanceSubscriptionDefinitionByConsumerInstanceId(consumerInstanceId, subscriptionDefinitionName string) error
+	UpdateConsumerInstanceSubscriptionDefinitionByConsumerInstanceID(consumerInstanceID, subscriptionDefinitionName string) error
 
 	UpdateConsumerInstanceSubscriptionDefinition(externalAPIID, subscriptionDefinitionName string) error
 	GetUserEmailAddress(ID string) (string, error)
@@ -80,7 +80,7 @@ type Client interface {
 	GetAPIV1ResourceInstancesWithPageSize(queryParams map[string]string, URL string, pageSize int) ([]*apiv1.ResourceInstance, error)
 	GetAPIServiceByName(serviceName string) (*v1alpha1.APIService, error)
 	// TODO JT
-	GetApiServicesByQuery(query string) ([]*v1alpha1.APIService, error)
+	GetAPIServicesByQuery(query string) ([]*v1alpha1.APIService, error)
 	GetAPIServiceInstanceByName(serviceInstanceName string) (*v1alpha1.APIServiceInstance, error)
 	GetAPIRevisionByName(serviceRevisionName string) (*v1alpha1.APIServiceRevision, error)
 	CreateCategory(categoryName string) (*catalog.Category, error)

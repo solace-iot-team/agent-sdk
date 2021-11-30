@@ -44,7 +44,7 @@ type Subscription interface {
 	GetAPIServiceInstanceName() string
 	GetAPIServiceName() string
 	GetAPIServiceRevisionName() string
-	GetOwningTeamId() string
+	GetOwningTeamID() string
 	GetState() SubscriptionState
 	GetPropertyValue(propertyKey string) string
 	UpdateState(newState SubscriptionState, description string) error
@@ -62,9 +62,9 @@ type CentralSubscription struct {
 	RemoteAPIStage          string                      `json:"-"`
 	apicClient              *ServiceClient
 	RemoteAPIAttributes     map[string]string
-	ApiServiceName          string
-	ApiServiceInstanceName  string
-	ApiServiceRevisionName  string
+	APIServiceName          string
+	APIServiceInstanceName  string
+	APIServiceRevisionName  string
 }
 
 // GetRemoteAPIAttributes - Returns the attributes from the API that the subscription is tied to.
@@ -370,22 +370,22 @@ func (s *CentralSubscription) UpdatePropertyValues(values map[string]interface{}
 	return nil
 }
 
-// GetOwningTeamId - Returns OwningTeamId of subscription.
-func (s *CentralSubscription) GetOwningTeamId() string {
+// GetOwningTeamID - Returns OwningTeamId of subscription.
+func (s *CentralSubscription) GetOwningTeamID() string {
 	return s.CatalogItemSubscription.OwningTeamId
 }
 
 // GetAPIServiceInstanceName - Returns APIServiceInstanceName.
 func (s *CentralSubscription) GetAPIServiceInstanceName() string {
-	return s.ApiServiceInstanceName
+	return s.APIServiceInstanceName
 }
 
 // GetAPIServiceName - Returns APIServiceName.
 func (s *CentralSubscription) GetAPIServiceName() string {
-	return s.ApiServiceName
+	return s.APIServiceName
 }
 
 // GetAPIServiceRevisionName - Returns APIServiceRevisionName.
 func (s *CentralSubscription) GetAPIServiceRevisionName() string {
-	return s.ApiServiceRevisionName
+	return s.APIServiceRevisionName
 }

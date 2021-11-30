@@ -49,7 +49,7 @@ type EmailNotificationTemplate struct {
 	ClientSecret    string `json:"clientSecret,omitempty"`
 	AuthTemplate    string `json:"authtemplate,omitempty"`
 	IsAPIKey        bool   `json:"isAPIKey,omitempty"`
-	ApiManagerId    string `json:"apiManagerId,omitempty"`
+	APIManagerID    string `json:"apiManagerId,omitempty"`
 }
 
 // ValidateSubscriptionConfigOnStartup - validate body and auth template tags during startup (config)

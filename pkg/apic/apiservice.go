@@ -191,8 +191,8 @@ func (c *ServiceClient) GetAPIServiceByName(serviceName string) (*v1alpha1.APISe
 	return apiService, nil
 }
 
-// GetAPIServiceByName - Returns the API service based on its name
-func (c *ServiceClient) GetApiServicesByQuery(query string) ([]*v1alpha1.APIService, error) {
+// GetAPIServicesByQuery - Returns the API service based on its name
+func (c *ServiceClient) GetAPIServicesByQuery(query string) ([]*v1alpha1.APIService, error) {
 	headers, err := c.createHeader()
 	if err != nil {
 		return nil, err

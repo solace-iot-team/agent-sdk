@@ -168,13 +168,13 @@ func (sm *subscriptionManager) preprocessSubscriptionForAPIServiceReferences(sub
 	if consumerInstance != nil && len(consumerInstance.Metadata.References) > 0 {
 		for _, reference := range consumerInstance.Metadata.References {
 			if reference.Kind == "APIServiceInstance" {
-				subscription.ApiServiceInstanceName = reference.Name
+				subscription.APIServiceInstanceName = reference.Name
 			}
 			if reference.Kind == "APIService" {
-				subscription.ApiServiceName = reference.Name
+				subscription.APIServiceName = reference.Name
 			}
 			if reference.Kind == "APIServiceRevision" {
-				subscription.ApiServiceRevisionName = reference.Name
+				subscription.APIServiceRevisionName = reference.Name
 			}
 
 		}

@@ -288,9 +288,9 @@ func (c *ServiceClient) UpdateConsumerInstanceSubscriptionDefinition(externalAPI
 	return err
 }
 
-//UpdateConsumerInstanceSubscriptionDefinitionByConsumerInstanceId -
-func (c *ServiceClient) UpdateConsumerInstanceSubscriptionDefinitionByConsumerInstanceId(consumerInstanceId, subscriptionDefinitionName string) error {
-	consumerInstance, err := c.getConsumerInstanceByID(consumerInstanceId)
+//UpdateConsumerInstanceSubscriptionDefinitionByConsumerInstanceID - updates ConsumerInstance and sets SubscriptionDefinition
+func (c *ServiceClient) UpdateConsumerInstanceSubscriptionDefinitionByConsumerInstanceID(consumerInstanceID, subscriptionDefinitionName string) error {
+	consumerInstance, err := c.getConsumerInstanceByID(consumerInstanceID)
 	if err != nil {
 		return err
 	}

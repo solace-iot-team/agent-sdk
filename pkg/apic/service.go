@@ -108,7 +108,7 @@ func (c *ServiceClient) GetConsumerInstancesByExternalAPIID(externalAPIID string
 	return c.getConsumerInstancesByExternalAPIID(externalAPIID)
 }
 
-// GetConsumerInstancesByAttributeQuery -
+// GetConsumerInstancesByQuery -
 func (c *ServiceClient) GetConsumerInstancesByQuery(query string) ([]*v1alpha1.ConsumerInstance, error) {
 	return c.getConsumerInstancesByAttributeQuery(query)
 }
