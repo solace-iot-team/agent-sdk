@@ -65,7 +65,7 @@ func (a *AuthConfiguration) validate() {
 }
 
 func (a *AuthConfiguration) validatePrivateKey() {
-	log.Tracef("validating PrivateKey Setting [CENTRAL_AUTH_PRIVATEKEY:%s]", a.GetPrivateKey())
+	log.Tracef("validating PrivateKey [CENTRAL_AUTH_PRIVATEKEY:%s]", a.GetPrivateKey())
 	if a.GetPrivateKey() == "" {
 		log.Warn("CENTRAL_AUTH_PRIVATEKEY not defined or empty")
 		exception.Throw(ErrBadConfig.FormatError(pathAuthPrivateKey))
@@ -82,6 +82,8 @@ func (a *AuthConfiguration) validatePrivateKey() {
 				// todo JT REMOVE
 				log.Errorf("Can not write private key to file location %s %s", a.GetPrivateKey(), err)
 				exception.Throw(ErrReadingKeyFile.FormatError("private key", a.GetPrivateKey()))
+			} else {
+				log.Tracef("Written private key to file location %s", a.GetPrivateKey())
 			}
 
 		}
@@ -90,6 +92,8 @@ func (a *AuthConfiguration) validatePrivateKey() {
 			// todo JT REMOVE
 			log.Errorf("CENTRAL_AUTH_PRIVATEKEY:%s file is not readable %s", a.GetPrivateKey(), err)
 			exception.Throw(ErrReadingKeyFile.FormatError("private key", a.GetPrivateKey()))
+		} else {
+			log.Tracef("Private key is readable at file location: %s", a.GetPrivateKey())
 		}
 	}
 }
@@ -110,6 +114,8 @@ func (a *AuthConfiguration) validatePublicKey() {
 			if err := saveKeyData(a.GetPublicKey(), publicKeyData); err != nil {
 				log.Errorf("Can not write public key to file location %s %s", a.GetPublicKey(), err)
 				exception.Throw(ErrReadingKeyFile.FormatError("public key", a.GetPublicKey()))
+			} else {
+				log.Tracef("Written public key to file location %s", a.GetPrivateKey())
 			}
 		}
 		// Validate that the file is readable
@@ -117,6 +123,8 @@ func (a *AuthConfiguration) validatePublicKey() {
 			// todo JT REMOVE
 			log.Errorf("CENTRAL_AUTH_PUBLICKEY:%s file is not readable %s", a.GetPublicKey(), err)
 			exception.Throw(ErrReadingKeyFile.FormatError("public key", a.GetPublicKey()))
+		} else {
+			log.Tracef("Public key is readable at file location: %s ", a.GetPrivateKey())
 		}
 	}
 }
