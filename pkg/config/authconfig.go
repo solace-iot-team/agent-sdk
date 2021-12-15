@@ -93,7 +93,7 @@ func (a *AuthConfiguration) validatePrivateKey() {
 			log.Errorf("CENTRAL_AUTH_PRIVATEKEY:%s file is not readable %s", a.GetPrivateKey(), err)
 			exception.Throw(ErrReadingKeyFile.FormatError("private key", a.GetPrivateKey()))
 		} else {
-			log.Tracef("Private key is readable at file location: %s", a.GetPrivateKey())
+			log.Tracef("Private key is readable at file location:  %s", a.GetPrivateKey())
 		}
 	}
 }
