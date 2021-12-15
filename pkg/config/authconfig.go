@@ -65,10 +65,13 @@ func (a *AuthConfiguration) validate() {
 }
 
 func (a *AuthConfiguration) validatePrivateKey() {
+	log.Tracef("validating PrivateKey Setting [CENTRAL_AUTH_PRIVATEKEY:%s]", a.GetPrivateKey())
 	if a.GetPrivateKey() == "" {
+		log.Warn("CENTRAL_AUTH_PRIVATEKEY not defined or empty")
 		exception.Throw(ErrBadConfig.FormatError(pathAuthPrivateKey))
 	} else {
 		if !fileExists(a.GetPrivateKey()) {
+			log.Tracef("CENTRAL_AUTH_PRIVATEKEY file does not exist: %s", a.GetPrivateKey())
 			privateKeyData := os.Getenv("CENTRAL_AUTH_PRIVATEKEY_DATA")
 			if privateKeyData == "" {
 				//todo JT REMOVE
@@ -77,7 +80,7 @@ func (a *AuthConfiguration) validatePrivateKey() {
 			}
 			if err := saveKeyData(a.GetPrivateKey(), privateKeyData); err != nil {
 				// todo JT REMOVE
-				log.Warnf("Can not write private key to file location %s ", a.GetPrivateKey())
+				log.Errorf("Can not write private key to file location %s %s", a.GetPrivateKey(), err)
 				exception.Throw(ErrReadingKeyFile.FormatError("private key", a.GetPrivateKey()))
 			}
 
@@ -85,14 +88,16 @@ func (a *AuthConfiguration) validatePrivateKey() {
 		// Validate that the file is readable
 		if _, err := os.Open(a.GetPrivateKey()); err != nil {
 			// todo JT REMOVE
-			log.Warn("CENTRAL_AUTH_PRIVATEKEY_DATA is not readable ")
+			log.Errorf("CENTRAL_AUTH_PRIVATEKEY:%s file is not readable %s", a.GetPrivateKey(), err)
 			exception.Throw(ErrReadingKeyFile.FormatError("private key", a.GetPrivateKey()))
 		}
 	}
 }
 
 func (a *AuthConfiguration) validatePublicKey() {
+	log.Tracef("validating PublicKey Setting [CENTRAL_AUTH_PUBLICKEY:%s]", a.GetPublicKey())
 	if a.GetPublicKey() == "" {
+		log.Warn("CENTRAL_AUTH_PUBLICKEY not defined or empty")
 		exception.Throw(ErrBadConfig.FormatError(pathAuthPublicKey))
 	} else {
 		if !fileExists(a.GetPublicKey()) {
@@ -103,14 +108,14 @@ func (a *AuthConfiguration) validatePublicKey() {
 				exception.Throw(ErrBadConfig.FormatError(pathAuthPublicKey))
 			}
 			if err := saveKeyData(a.GetPublicKey(), publicKeyData); err != nil {
-				log.Warnf("Can not write private key to file location %s", a.GetPrivateKey())
-				exception.Throw(ErrReadingKeyFile.FormatError("private key", a.GetPrivateKey()))
+				log.Errorf("Can not write public key to file location %s %s", a.GetPublicKey(), err)
+				exception.Throw(ErrReadingKeyFile.FormatError("public key", a.GetPublicKey()))
 			}
 		}
 		// Validate that the file is readable
 		if _, err := os.Open(a.GetPublicKey()); err != nil {
 			// todo JT REMOVE
-			log.Warnf("CENTRAL_AUTH_PUBLICKEY_DATA is not readable ")
+			log.Errorf("CENTRAL_AUTH_PUBLICKEY:%s file is not readable %s", a.GetPublicKey(), err)
 			exception.Throw(ErrReadingKeyFile.FormatError("public key", a.GetPublicKey()))
 		}
 	}
