@@ -65,7 +65,7 @@ func (a *AuthConfiguration) validate() {
 }
 
 func (a *AuthConfiguration) validatePrivateKey() {
-	log.Tracef("validating PrivateKey [CENTRAL_AUTH_PRIVATEKEY:%s]", a.GetPrivateKey())
+	log.Tracef("validating PrivateKey configuration [CENTRAL_AUTH_PRIVATEKEY:%s]", a.GetPrivateKey())
 	if a.GetPrivateKey() == "" {
 		log.Warn("CENTRAL_AUTH_PRIVATEKEY not defined or empty")
 		exception.Throw(ErrBadConfig.FormatError(pathAuthPrivateKey))
@@ -99,7 +99,7 @@ func (a *AuthConfiguration) validatePrivateKey() {
 }
 
 func (a *AuthConfiguration) validatePublicKey() {
-	log.Tracef("validating PublicKey Setting [CENTRAL_AUTH_PUBLICKEY:%s]", a.GetPublicKey())
+	log.Tracef("validating PublicKey configuration [CENTRAL_AUTH_PUBLICKEY:%s]", a.GetPublicKey())
 	if a.GetPublicKey() == "" {
 		log.Warn("CENTRAL_AUTH_PUBLICKEY not defined or empty")
 		exception.Throw(ErrBadConfig.FormatError(pathAuthPublicKey))
