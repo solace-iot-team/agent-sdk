@@ -21,6 +21,7 @@ import (
 
 type mockSvcClient struct {
 	apiSvc *v1alpha1.APIService
+	err    error
 }
 
 func (m *mockSvcClient) GetAPIRevisions(queryParams map[string]string, stage string) ([]*v1alpha1.APIServiceRevision, error) {
@@ -47,7 +48,7 @@ func (m *mockSvcClient) CreateCategory(categoryName string) (*catalog.Category, 
 	return nil, nil
 }
 
-func (m *mockSvcClient) AddCategoryCache(categoryCache cache.Cache) {
+func (m *mockSvcClient) AddCache(categoryCache, teamCache cache.Cache) {
 	return
 }
 
@@ -68,17 +69,24 @@ func (m *mockSvcClient) GetAPIServiceInstanceByName(instanceName string) (*v1alp
 }
 
 func (m *mockSvcClient) SetTokenGetter(tokenGetter auth.PlatformTokenGetter) {}
+
 func (m *mockSvcClient) PublishService(serviceBody *apic.ServiceBody) (*v1alpha1.APIService, error) {
 	return m.apiSvc, nil
 }
-func (m *mockSvcClient) RegisterSubscriptionWebhook() error { return nil }
+func (m *mockSvcClient) RegisterSubscriptionWebhook() error {
+	return m.err
+}
+
 func (m *mockSvcClient) RegisterSubscriptionSchema(subscriptionSchema apic.SubscriptionSchema, update bool) error {
 	return nil
 }
+
 func (m *mockSvcClient) UpdateSubscriptionSchema(subscriptionSchema apic.SubscriptionSchema) error {
 	return nil
 }
+
 func (m *mockSvcClient) GetSubscriptionManager() apic.SubscriptionManager { return nil }
+
 func (m *mockSvcClient) GetCatalogItemIDForConsumerInstance(instanceID string) (string, error) {
 	return "", nil
 }
@@ -118,28 +126,29 @@ func (m *mockSvcClient) ExecuteAPI(method, url string, queryParam map[string]str
 }
 func (m *mockSvcClient) OnConfigChange(cfg config.CentralConfig) {}
 
-func (m *mockSvcClient) SetConfig(cfg corecfg.CentralConfig) {
+func (m *mockSvcClient) SetConfig(cfg corecfg.CentralConfig) {}
+
+func (m *mockSvcClient) GetTeam(queryParams map[string]string) ([]apic.PlatformTeam, error) {
+	return nil, nil
 }
 
-var oldUpdateCacheForExternalAPIID = updateCacheForExternalAPIID
-var oldUpdateCacheForExternalAPIName = updateCacheForExternalAPIName
-var oldUpdateCacheForExternalAPI = updateCacheForExternalAPI
-
-func fakeCacheUpdateCalls() {
-	updateCacheForExternalAPIID = func(string) (interface{}, error) { return nil, nil }
-	updateCacheForExternalAPIName = func(string) (interface{}, error) { return nil, nil }
-	updateCacheForExternalAPI = func(map[string]string) (interface{}, error) { return nil, nil }
+func (m *mockSvcClient) GetAccessControlList(aclName string) (*v1alpha1.AccessControlList, error) {
+	return nil, nil
 }
 
-func restoreCacheUpdateCalls() {
-	updateCacheForExternalAPIID = oldUpdateCacheForExternalAPIID
-	updateCacheForExternalAPIName = oldUpdateCacheForExternalAPIName
-	updateCacheForExternalAPI = oldUpdateCacheForExternalAPI
+func (m *mockSvcClient) UpdateAccessControlList(acl *v1alpha1.AccessControlList) (*v1alpha1.AccessControlList, error) {
+	return nil, nil
+}
+
+func (m *mockSvcClient) CreateAccessControlList(acl *v1alpha1.AccessControlList) (*v1alpha1.AccessControlList, error) {
+	return nil, nil
 }
 
 func TestDiscoveryCache(t *testing.T) {
-	fakeCacheUpdateCalls()
 	dcj := newDiscoveryCache(true)
+	dcj.getHCStatus = func(_ string) hc.StatusLevel {
+		return hc.OK
+	}
 	attributeKey := "Attr1"
 	attributeValue := "testValue"
 	emptyAPISvc := []v1.ResourceInstance{}
@@ -183,6 +192,9 @@ func TestDiscoveryCache(t *testing.T) {
 	err := Initialize(cfg)
 	assert.Nil(t, err)
 
+	assert.True(t, dcj.Ready())
+	assert.Nil(t, dcj.Status())
+
 	serverAPISvcResponse = emptyAPISvc
 	dcj.updateAPICache()
 	assert.Equal(t, 0, len(agent.apiMap.GetKeys()))
@@ -216,6 +228,4 @@ func TestDiscoveryCache(t *testing.T) {
 	assert.True(t, IsAPIPublishedByID("1111"))
 	assert.True(t, IsAPIPublishedByPrimaryKey("1234"))
 	assert.False(t, IsAPIPublishedByID("2222"))
-
-	restoreCacheUpdateCalls()
 }

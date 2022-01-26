@@ -1,12 +1,10 @@
 package agent
 
 import (
-	"encoding/json"
 	"fmt"
 	"sync"
 	"time"
 
-	coreapi "github.com/Axway/agent-sdk/pkg/api"
 	"github.com/Axway/agent-sdk/pkg/apic"
 	apiV1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
 	v1 "github.com/Axway/agent-sdk/pkg/apic/apiserver/models/api/v1"
@@ -22,7 +20,6 @@ import (
 const (
 	apiServerPageSize        = 100
 	healthcheckEndpoint      = "central"
-	attributesQueryParam     = "attributes."
 	apiServerFields          = "name,title,attributes"
 	serviceInstanceCache     = "ServiceInstances"
 	serviceInstanceNameCache = "ServiceInstanceNames"
@@ -41,6 +38,7 @@ type discoveryCache struct {
 	lastInstanceTime time.Time
 	lastCategoryTime time.Time
 	refreshAll       bool
+	getHCStatus      hc.GetStatusLevel
 }
 
 func newDiscoveryCache(getAll bool) *discoveryCache {
@@ -49,18 +47,19 @@ func newDiscoveryCache(getAll bool) *discoveryCache {
 		lastInstanceTime: time.Time{},
 		lastCategoryTime: time.Time{},
 		refreshAll:       getAll,
+		getHCStatus:      hc.GetStatus,
 	}
 }
 
 //Ready -
 func (j *discoveryCache) Ready() bool {
-	status := hc.GetStatus(healthcheckEndpoint)
+	status := j.getHCStatus(healthcheckEndpoint)
 	return status == hc.OK
 }
 
 //Status -
 func (j *discoveryCache) Status() error {
-	status := hc.GetStatus(healthcheckEndpoint)
+	status := j.getHCStatus(healthcheckEndpoint)
 	if status == hc.OK {
 		return nil
 	}
@@ -233,43 +232,6 @@ func (j *discoveryCache) loadServiceInstancesFromCache(serviceInstances []*apiV1
 	return cachedInstances
 }
 
-var updateCacheForExternalAPIPrimaryKey = func(externalAPIPrimaryKey string) (interface{}, error) {
-	query := map[string]string{
-		apic.QueryKey: attributesQueryParam + apic.AttrExternalAPIPrimaryKey + "==\"" + externalAPIPrimaryKey + "\"",
-	}
-
-	return updateCacheForExternalAPI(query)
-}
-
-var updateCacheForExternalAPIID = func(externalAPIID string) (interface{}, error) {
-	query := map[string]string{
-		apic.QueryKey: attributesQueryParam + apic.AttrExternalAPIID + "==\"" + externalAPIID + "\"",
-	}
-
-	return updateCacheForExternalAPI(query)
-}
-
-var updateCacheForExternalAPIName = func(externalAPIName string) (interface{}, error) {
-	query := map[string]string{
-		apic.QueryKey: attributesQueryParam + apic.AttrExternalAPIName + "==\"" + externalAPIName + "\"",
-	}
-
-	return updateCacheForExternalAPI(query)
-}
-
-var updateCacheForExternalAPI = func(query map[string]string) (interface{}, error) {
-	apiServerURL := agent.cfg.GetServicesURL()
-
-	response, err := agent.apicClient.ExecuteAPI(coreapi.GET, apiServerURL, query, nil)
-	if err != nil {
-		return nil, err
-	}
-	apiService := apiV1.ResourceInstance{}
-	json.Unmarshal(response, &apiService)
-	addItemToAPICache(apiService)
-	return apiService, nil
-}
-
 func validateAPIOnDataplane(serviceInstances []*apiV1.ResourceInstance) []*apiV1.ResourceInstance {
 	cleanServiceInstances := make([]*apiV1.ResourceInstance, 0)
 	// Validate the API on dataplane.  If API is not valid, mark the consumer instance as "DELETED"
@@ -285,7 +247,7 @@ func validateAPIOnDataplane(serviceInstances []*apiV1.ResourceInstance) []*apiV1
 		// - externalAPIID should not be empty
 		// - externalAPIStage could be empty for dataplanes that do not support it
 		if externalAPIID != "" && !agent.apiValidator(externalAPIID, externalAPIStage) {
-			deleteServiceInstanceOrService(serviceInstance, externalAPIID, externalAPIStage)
+			deleteServiceInstanceOrService(serviceInstance, externalAPIID)
 		} else {
 			cleanServiceInstances = append(cleanServiceInstances, serviceInstanceResource)
 		}
@@ -293,17 +255,18 @@ func validateAPIOnDataplane(serviceInstances []*apiV1.ResourceInstance) []*apiV1
 	return cleanServiceInstances
 }
 
-func shouldDeleteService(apiID, stage string) bool {
-	// no agent-specific validator means to delete the service
-	if agent.deleteServiceValidator == nil {
-		return true
+func shouldDeleteService(apiID string) bool {
+	list, err := agent.apicClient.GetConsumerInstancesByExternalAPIID(apiID)
+	if err != nil {
+		return false
 	}
-	// let the agent decide if service should be deleted
-	return agent.deleteServiceValidator(apiID, stage)
+
+	// if there is only 1 consumer instance left, we can signal to delete the service too
+	return len(list) <= 1
 }
 
-func deleteServiceInstanceOrService(serviceInstance *v1alpha1.APIServiceInstance, externalAPIID, externalAPIStage string) {
-	if shouldDeleteService(externalAPIID, externalAPIStage) {
+func deleteServiceInstanceOrService(serviceInstance *v1alpha1.APIServiceInstance, externalAPIID string) {
+	if shouldDeleteService(externalAPIID) {
 		log.Infof("API no longer exists on the dataplane; deleting the API Service and corresponding catalog item %s", serviceInstance.Title)
 		// deleting the service will delete all associated resources, including the consumerInstance
 		err := agent.apicClient.DeleteServiceByAPIID(externalAPIID)

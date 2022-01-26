@@ -3,9 +3,11 @@ package apic
 import (
 	"fmt"
 	"net/url"
+	"sort"
 	"strconv"
 	"strings"
 
+	"github.com/Axway/agent-sdk/pkg/util"
 	coreerrors "github.com/Axway/agent-sdk/pkg/util/errors"
 	"github.com/Axway/agent-sdk/pkg/util/log"
 	"github.com/getkin/kin-openapi/openapi3"
@@ -140,4 +142,24 @@ func (p *oas3SpecProcessor) parseURLsIntoEndpoints(defaultURL string, allURLs []
 	}
 
 	return endPoints, nil
+}
+
+func (p *oas3SpecProcessor) getAuthInfo() ([]string, []APIKeyInfo) {
+	authPolicies := []string{}
+	keyInfo := []APIKeyInfo{}
+	for _, scheme := range p.spec.Components.SecuritySchemes {
+		switch scheme.Value.Type {
+		case oasSecurityAPIKey:
+			authPolicies = append(authPolicies, Apikey)
+			keyInfo = append(keyInfo, APIKeyInfo{
+				Location: scheme.Value.In,
+				Name:     scheme.Value.Name,
+			})
+		case oasSecurityOauth:
+			authPolicies = append(authPolicies, Oauth)
+		}
+	}
+	authPolicies = util.RemoveDuplicateValuesFromStringSlice(authPolicies)
+	sort.Strings(authPolicies)
+	return authPolicies, keyInfo
 }

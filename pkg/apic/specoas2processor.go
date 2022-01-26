@@ -2,13 +2,20 @@ package apic
 
 import (
 	"net"
+	"sort"
 	"strconv"
 	"strings"
 
+	"github.com/Axway/agent-sdk/pkg/util"
 	coreerrors "github.com/Axway/agent-sdk/pkg/util/errors"
 )
 
 var validOA2Schemes = map[string]bool{"http": true, "https": true, "ws": true, "wss": true}
+
+const (
+	oasSecurityAPIKey = "apiKey"
+	oasSecurityOauth  = "oauth2"
+)
 
 // oas2SpecProcessor parses and validates an OAS2 spec, and exposes methods to modify the content of the spec.
 type oas2SpecProcessor struct {
@@ -56,6 +63,26 @@ func (p *oas2SpecProcessor) getEndpoints() ([]EndpointDefinition, error) {
 		endPoints = append(endPoints, endPoint)
 	}
 	return endPoints, nil
+}
+
+func (p *oas2SpecProcessor) getAuthInfo() ([]string, []APIKeyInfo) {
+	authPolicies := []string{}
+	keyInfo := []APIKeyInfo{}
+	for _, scheme := range p.spec.SecurityDefinitions {
+		switch scheme.Type {
+		case oasSecurityAPIKey:
+			authPolicies = append(authPolicies, Apikey)
+			keyInfo = append(keyInfo, APIKeyInfo{
+				Location: scheme.In,
+				Name:     scheme.Name,
+			})
+		case oasSecurityOauth:
+			authPolicies = append(authPolicies, Oauth)
+		}
+	}
+	authPolicies = util.RemoveDuplicateValuesFromStringSlice(authPolicies)
+	sort.Strings(authPolicies)
+	return authPolicies, keyInfo
 }
 
 func createEndpointDefinition(scheme, host string, port int, basePath string) EndpointDefinition {
