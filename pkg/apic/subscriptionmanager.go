@@ -1,6 +1,7 @@
 package apic
 
 import (
+	"errors"
 	"sync"
 	"time"
 
@@ -139,11 +140,11 @@ func (sm *subscriptionManager) preprocessSubscription(subscription *CentralSubsc
 	}
 	if apiserverInfo.Environment.Name != sm.apicClient.cfg.GetEnvironmentName() {
 		log.Debugf("Subscription '%s' skipped because associated catalog item belongs to '%s' environment and the agent is configured for managing '%s' environment", subscription.GetName(), apiserverInfo.Environment.Name, sm.apicClient.cfg.GetEnvironmentName())
-		return err
+		return errors.New("subscription skipped - not in agent's environment")
 	}
 	if apiserverInfo.ConsumerInstance.Name == "" {
 		log.Debugf("Subscription '%s' skipped because associated catalog item is not created by agent", subscription.GetName())
-		return err
+		return errors.New("subscription skipped - catalog itme not created by agent")
 	}
 	sm.preprocessSubscriptionForConsumerInstance(subscription, apiserverInfo.ConsumerInstance.Name)
 	return nil
