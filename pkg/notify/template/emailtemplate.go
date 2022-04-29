@@ -38,20 +38,21 @@ var subNotifTemplateMap = map[string]string{
 
 // EmailNotificationTemplate - (go) template for email notification
 type EmailNotificationTemplate struct {
-	CatalogItemID   string `json:"catalogItemId"`
-	CatalogItemURL  string `json:"catalogItemUrl"`
-	CatalogItemName string `json:"catalogItemName"`
-	Email           string `json:"email,omitempty"`
-	Message         string `json:"message,omitempty"`
-	Key             string `json:"key,omitempty"`
-	KeyHeaderName   string `json:"keyHeaderName,omitempty"`
-	KeyName         string `json:"keyName,omitempty"`
-	KeyLocation     string `json:"keyLocation,omitempty"`
-	ClientID        string `json:"clientID,omitempty"`
-	ClientSecret    string `json:"clientSecret,omitempty"`
-	AuthTemplate    string `json:"authtemplate,omitempty"`
-	IsAPIKey        bool   `json:"isAPIKey,omitempty"`
-	APIManagerID    string `json:"apiManagerId,omitempty"`
+	CatalogItemID       string `json:"catalogItemId"`
+	CatalogItemURL      string `json:"catalogItemUrl"`
+	CatalogItemName     string `json:"catalogItemName"`
+	Email               string `json:"email,omitempty"`
+	Message             string `json:"message,omitempty"`
+	Key                 string `json:"key,omitempty"`
+	KeyHeaderName       string `json:"keyHeaderName,omitempty"`
+	KeyName             string `json:"keyName,omitempty"`
+	KeyLocation         string `json:"keyLocation,omitempty"`
+	ClientID            string `json:"clientID,omitempty"`
+	ClientSecret        string `json:"clientSecret,omitempty"`
+	AuthTemplate        string `json:"authtemplate,omitempty"`
+	IsAPIKey            bool   `json:"isAPIKey,omitempty"`
+	APIManagerID        string `json:"apiManagerId,omitempty"`
+	APIManagerUsageHint string `json:"apiManagerUsageHint,omitempty"`
 }
 
 // ValidateSubscriptionConfigOnStartup - validate body and auth template tags during startup (config)
