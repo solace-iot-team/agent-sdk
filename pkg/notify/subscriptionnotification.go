@@ -24,21 +24,22 @@ import (
 
 //SubscriptionNotification - the struct that is sent to the notification and used to fill in email templates
 type SubscriptionNotification struct {
-	CatalogItemID   string                 `json:"catalogItemId"`
-	CatalogItemURL  string                 `json:"catalogItemUrl"`
-	CatalogItemName string                 `json:"catalogItemName"`
-	Action          apic.SubscriptionState `json:"action"`
-	Email           string                 `json:"email,omitempty"`
-	Message         string                 `json:"message,omitempty"`
-	Key             string                 `json:"key,omitempty"`
-	ClientID        string                 `json:"clientID,omitempty"`
-	ClientSecret    string                 `json:"clientSecret,omitempty"`
-	AuthTemplate    string                 `json:"authtemplate,omitempty"`
-	IsAPIKey        bool                   `json:"isAPIKey,omitempty"`
-	KeyName         string
-	KeyLocation     string
-	APIManagerID    string                 `json:"apiManagerId,omitempty"`
-	apiClient       coreapi.Client
+	CatalogItemID       string                 `json:"catalogItemId"`
+	CatalogItemURL      string                 `json:"catalogItemUrl"`
+	CatalogItemName     string                 `json:"catalogItemName"`
+	Action              apic.SubscriptionState `json:"action"`
+	Email               string                 `json:"email,omitempty"`
+	Message             string                 `json:"message,omitempty"`
+	Key                 string                 `json:"key,omitempty"`
+	ClientID            string                 `json:"clientID,omitempty"`
+	ClientSecret        string                 `json:"clientSecret,omitempty"`
+	AuthTemplate        string                 `json:"authtemplate,omitempty"`
+	IsAPIKey            bool                   `json:"isAPIKey,omitempty"`
+	KeyName             string
+	KeyLocation         string
+	APIManagerID        string `json:"apiManagerId,omitempty"`
+	APIManagerUsageHint string `json:"apiManagerUsageHint,omitempty"`
+	apiClient           coreapi.Client
 }
 
 //NewSubscriptionNotification - creates a new subscription notification object
