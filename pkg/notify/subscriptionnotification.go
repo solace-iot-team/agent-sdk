@@ -220,20 +220,21 @@ func (s *SubscriptionNotification) BuildSMTPMessage(template *corecfg.EmailTempl
 	log.Debugf("Sending email %s, %s, %s", fromAddress, toAddress, subject)
 
 	emailNotificationTemplate := emailtemplate.EmailNotificationTemplate{
-		CatalogItemID:   s.CatalogItemID,
-		CatalogItemURL:  s.CatalogItemURL,
-		CatalogItemName: s.CatalogItemName,
-		Email:           s.Email,
-		Message:         s.Message,
-		Key:             s.Key,
-		KeyHeaderName:   s.KeyName,
-		KeyName:         s.KeyName,
-		KeyLocation:     s.KeyLocation,
-		ClientID:        s.ClientID,
-		ClientSecret:    s.ClientSecret,
-		AuthTemplate:    s.AuthTemplate,
-		IsAPIKey:        s.IsAPIKey,
-		APIManagerID:    s.APIManagerID,
+		CatalogItemID:       s.CatalogItemID,
+		CatalogItemURL:      s.CatalogItemURL,
+		CatalogItemName:     s.CatalogItemName,
+		Email:               s.Email,
+		Message:             s.Message,
+		Key:                 s.Key,
+		KeyHeaderName:       s.KeyName,
+		KeyName:             s.KeyName,
+		KeyLocation:         s.KeyLocation,
+		ClientID:            s.ClientID,
+		ClientSecret:        s.ClientSecret,
+		AuthTemplate:        s.AuthTemplate,
+		IsAPIKey:            s.IsAPIKey,
+		APIManagerID:        s.APIManagerID,
+		APIManagerUsageHint: s.APIManagerUsageHint,
 	}
 
 	// Shouldn't have to check error from ValidateSubscriptionConfigOnNotification since startup passed the subscription validation check
